@@ -1,0 +1,35 @@
+{
+  "root": true,
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "parser": "babel-eslint",
+    "sourceType": "module"
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "extends": ["plugin:vue/essential", "@vue/airbnb", "@vue/prettier"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": ["error"],
+    "linebreak-style": ["error", "windows"],
+    "no-multi-assign": "off",
+    "no-underscore-dangle": "warn",
+    "eqeqeq": "warn",
+    "no-param-reassign": "warn",
+    "camelcase": "warn",
+    "class-methods-use-this": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": "off",
+    "no-console": "warn",
+    "no-debugger": "warn",
+    "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": "webpack.config.js"
+    }
+  }
+}
