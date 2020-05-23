@@ -1,0 +1,28 @@
+html {
+  /* Other */
+  font-size: 62.5%; // Base 10 font sizes
+}
+
+html,
+body,
+#app {
+  /* Positioning */
+  position: relative;
+
+  /* Display & Box Model */
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+* {
+  /* Display & Box Model */
+  box-sizing: border-box;
+
+  &::before,
+  &::after {
+    /* Display & Box Model */
+    box-sizing: border-box;
+  }
+}

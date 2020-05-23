@@ -1,0 +1,7 @@
+@function max($numbers...) {
+  @return unquote('max(#{$numbers})');
+}
+
+@function min($numbers...) {
+  @return unquote('min(#{$numbers})');
+}
