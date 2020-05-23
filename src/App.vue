@@ -1,8 +1,52 @@
 <template lang="pug">
   #app
-    #nav
-      router-link( to="/") Home
-      router-link( to="/about") About
+    AppNavgiation
+    .content-wrapper
+      transition(name="slide" mode="out-in")
+        router-view
 </template>
 
-<style lang="sass" scoped></style>
+<script>
+import AppNavgiation from '@/components/AppNavigation';
+
+export default {
+  name: 'App',
+  components: {
+    AppNavgiation
+  }
+};
+</script>
+
+<style lang="scss">
+@import '~@/styles/globals';
+</style>
+
+<style lang="scss" scoped>
+$app-navigation-width: 7.5rem;
+
+// Add padding to account for AppNavigation
+.content-wrapper {
+  @media (map-get($viewport, 'min-width-7')) {
+    padding-left: $app-navigation-width;
+  }
+
+  @media (map-get($viewport, 'max-width-7')) {
+    padding-top: $app-navigation-width;
+  }
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.25s;
+}
+.slide-enter,
+.slide-leave-to {
+  @media (map-get($viewport, 'min-width-7')) {
+    transform: translateX(100%);
+  }
+
+  @media (map-get($viewport, 'max-width-7')) {
+    transform: translateY(100%);
+  }
+}
+</style>
