@@ -12,7 +12,7 @@ module.exports = {
   css: {
     loaderOptions: {
       scss: {
-        // prependData: '@import "~@/styles/index.prepend";'
+        prependData: '@import "~@/styles/prepend";'
       }
     }
   }
