@@ -11,7 +11,7 @@
       ul.project-list(v-if="isOpen")
         router-link(
           exact
-          v-for="({ path, name }, index) in allProjectRoutes"
+          v-for="({ path, name }, index) in allProjectRoutesOrLanding"
           v-slot="{ href, route, navigate, isActive, isExactActive }"
           :to="path"
           :key="index")
@@ -39,8 +39,8 @@ export default {
       return this.$route.name;
     },
 
-    allProjectRoutes() {
-      return this.$router.options.routes.filter(route => route?.meta?.isProject);
+    allProjectRoutesOrLanding() {
+      return this.$router.options.routes.filter(route => route?.meta?.isProject || route?.meta?.isLanding);
     },
 
     menuIcon() {
@@ -85,15 +85,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/fonts/ibm-plex-sans-variable';
-@include google-font('Material Icons');
+@include google-font('Archivo Black');
+@include google-font('Lora');
 
 $app-navigation-width: 7.5rem;
 
 .app-navigation {
   position: fixed;
 
-  font-family: 'IBM Plex Sans Variable';
+  font-family: 'Lora';
 
   @media (map-get($viewport, 'min-width-7')) {
     top: 0;
@@ -240,8 +240,10 @@ $app-navigation-width: 7.5rem;
   writing-mode: vertical-rl;
 
   color: #fff;
+  font-family: 'Archivo Black';
   font-size: clamp(2rem, 3vw, 3rem);
   font-weight: 700;
+  letter-spacing: 2px;
   text-align: center;
   text-overflow: ellipsis;
   text-transform: uppercase;
