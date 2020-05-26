@@ -2,46 +2,65 @@
   .landing
     span.welcome Welcome to
     h1.title The Showcase
-    p.description This is a space where I can present different ideas I have for UI/UX design.
+    p.description The goal of this space is to present different ideas I have for UI/UX design.
+    p.github You can check out the source code on
+      = ' '
+      LinkIcon(
+        :href="'https://github.com/nkooman/the-showcase/'"
+        :title="'Link to the GitHub repository'"
+        :text="'GitHub'"
+        :icon-before="'link'"
+        :is-external="true")
+      | !
+
 </template>
 
 <script>
+import LinkIcon from '@/components/LinkIcon';
+
 export default {
-  name: 'Landing'
+  name: 'Landing',
+
+  components: {
+    LinkIcon
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-@include google-font {
-  @include google-font('Archivo Black');
-  @include google-font('Lora');
-}
+@include google-font('Archivo Black');
+@include google-font('Lora');
 
 .landing {
   padding: 2rem;
   height: 100%;
   width: 100%;
+}
 
-  .welcome {
-    font-size: clamp(2.5rem, 4.5vw, 7.5rem);
-  }
+.welcome {
+  font-size: clamp(2.5rem, 4.5vw, 7.5rem);
+  line-height: 100%;
+}
 
-  .title {
-    margin-top: 1rem;
+.title {
+  margin: 0;
 
-    font-size: clamp(3rem, 9vw, 20rem);
-    line-height: 50%;
-  }
+  font-size: clamp(3rem, 9vw, 20rem);
+}
 
-  .welcome,
-  .title {
-    font-family: 'Archivo Black', sans-serif;
-    text-transform: uppercase;
-  }
+.welcome,
+.title {
+  font-family: 'Archivo Black', sans-serif;
+  line-height: 0.75;
+  text-transform: uppercase;
+}
 
-  .description {
-    font-family: 'Lora', serif;
-    font-size: clamp(2rem, 2vw, 3rem);
-  }
+.description,
+.github {
+  margin: 5rem 0;
+
+  color: #000;
+  font-family: 'Lora', serif;
+  font-size: clamp(2rem, 2vw, 3rem);
 }
 </style>

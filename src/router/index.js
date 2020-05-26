@@ -8,7 +8,10 @@ const routes = [
   {
     path: '/',
     name: 'The Showcase',
-    component: Landing
+    component: Landing,
+    meta: {
+      isLanding: true
+    }
   }
 ];
 
