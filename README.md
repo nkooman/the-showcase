@@ -1,4 +1,4 @@
-# ui-ux-sandbox
+# The Showcase
 
 ## Project setup
 ```
