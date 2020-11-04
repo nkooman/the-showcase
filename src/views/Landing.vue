@@ -2,7 +2,7 @@
   .landing
     span.welcome Welcome to
     h1.title The Showcase
-    p.description The goal of this space is to present different ideas I have for UI/UX design.
+    p.description The goal of this space is to present different ideas I have for UI/UX design and small CSS or JS projects.
     p.github You can check out the source code on
       = ' '
       LinkIcon(
@@ -32,9 +32,11 @@ export default {
 @include google-font('Lora');
 
 .landing {
-  padding: 2rem;
-  height: 100%;
   width: 100%;
+  height: 100%;
+  padding: 3rem;
+
+  background: #fff;
 }
 
 .welcome {
@@ -60,7 +62,7 @@ export default {
   margin: 5rem 0;
 
   color: #000;
-  font-family: 'Lora', serif;
   font-size: clamp(2rem, 2vw, 3rem);
+  font-family: 'Lora', serif;
 }
 </style>

@@ -3,14 +3,20 @@
     :href="href"
     :title="title"
     :target="isExternal ? '_blank' : '_self'")
-    i.material-icons(v-if="iconBefore") {{ iconBefore }}
+    MaterialIcon.icon(v-if="iconBefore") {{ iconBefore }}
     span.text(v-if="text") {{ text }}
-    i.material-icons(v-if="iconAfter") {{ iconAfter }}
+    MaterialIcon.icon(v-if="iconAfter") {{ iconAfter }}
 </template>
 
 <script>
+import MaterialIcon from '@/components/MaterialIcon';
+
 export default {
   name: 'LinkIcon',
+
+  components: {
+    MaterialIcon
+  },
 
   props: {
     href: {
@@ -30,15 +36,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@include google-font('Material Icons');
-
 .link {
   color: inherit;
   font-weight: 800;
+  white-space: nowrap;
   text-decoration: none;
 
   &:hover .text {
     text-decoration: underline;
   }
+}
+
+.icon {
+  vertical-align: middle;
 }
 </style>

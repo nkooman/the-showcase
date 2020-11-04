@@ -1,11 +1,25 @@
 {
-    "extends": "stylelint-config-standard",
-    "plugins": ["stylelint-order"],
-    "rules": {
-        "at-rule-no-unknown": null,
-        "declaration-colon-newline-after": "always-multi-line"
-        "function-name-case": "lower",
-        "order/order": ["custom-properties", "declarations"],
-        "order/properties-alphabetical-order": true,
-    }
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-rational-order"
+  ],
+  "plugins": [
+    "stylelint-order",
+    "stylelint-config-rational-order/plugin"
+  ],
+  "rules": {
+    "indentation": 2,
+    "at-rule-no-unknown": null,
+    "function-name-case": "lower",
+    "declaration-colon-newline-after": null,
+    "declaration-empty-line-before": null,
+    "value-list-comma-newline-after": null,
+    "order/properties-order": [],
+    "plugin/rational-order": [
+      true,
+      {
+        "empty-line-between-groups": true
+      }
+    ]
+  }
 }

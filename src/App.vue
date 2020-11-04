@@ -24,8 +24,15 @@ export default {
 <style lang="scss" scoped>
 $app-navigation-width: 7.5rem;
 
-// Add padding to account for AppNavigation
 .content-wrapper {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  background: #1a1e22;
+
+  // Add padding to account for AppNavigation
   @media (map-get($viewport, 'min-width-7')) {
     padding-left: $app-navigation-width;
   }
@@ -37,8 +44,9 @@ $app-navigation-width: 7.5rem;
 
 .slide-enter-active,
 .slide-leave-active {
-  transition: all 0.25s;
+  transition: all 0.3s;
 }
+
 .slide-enter,
 .slide-leave-to {
   @media (map-get($viewport, 'min-width-7')) {

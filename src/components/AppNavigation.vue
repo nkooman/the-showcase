@@ -2,36 +2,52 @@
   nav.app-navigation(:class="{ active: isOpen }")
     .sidebar
       a.menu-toggle(role="button" @click="toggleNavigation" aria-label="Toggle menu")
-        i.material-icons {{ menuIcon }}
-      .project-title(v-show="!isOpen") {{ currentRouteName }}
+        MaterialIcon.menu-icon {{ menuIcon }}
+      .project-title(:title="currentRouteName") {{ currentRouteName }}
       .project-selector
-        a.backward(role="button" aria-label="Navigate backward" @click="navigateBackward"): i.material-icons chevron_left
-        a.forward(role="button" aria-label="Navigate forward" @click="navigateForward"): i.material-icons chevron_right
+        a.backward(role="button" aria-label="Navigate backward" @click="navigateBackward")
+          MaterialIcon.menu-icon chevron_left
+        a.forward(role="button" aria-label="Navigate forward" @click="navigateForward")
+          MaterialIcon.menu-icon chevron_right
     .project-container
       ul.project-list(v-if="isOpen")
         router-link(
           exact
-          v-for="({ path, name }, index) in allProjectRoutesOrLanding"
-          v-slot="{ href, route, navigate, isActive, isExactActive }"
-          :to="path"
-          :key="index")
-          li.item(
-            :class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active']")
+          v-slot="{ href, navigate, isActive, isExactActive }"
+          :to="landingRoute.path")
+          li.item.landing-link(:class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active']")
             a.link(
               :href="href"
               @click="[navigate($event), closeNavigation()]")
-              | {{ name }}
+              | {{ landingRoute.name }}
+        li.nested-list
+          ul.year-category(v-for="[year, routes] in aggregatedProjectRoutesByCreatedOn")
+            li.section-label(:key="Math.random()") {{ year }}
+            router-link(
+              exact
+              v-for="{ path, name } in routes"
+              v-slot="{ href, navigate, isActive, isExactActive }"
+              :to="path"
+              :key="Math.random()")
+              li.item(:class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active']")
+                a.link(
+                  :href="href"
+                  @click="[navigate($event), closeNavigation()]")
+                  | {{ name }}
 </template>
 
 <script>
+import MaterialIcon from '@/components/MaterialIcon';
+
 export default {
   name: 'AppNavigation',
 
+  components: {
+    MaterialIcon
+  },
+
   data: () => ({
-    isOpen: false,
-    hover: {
-      top: ''
-    }
+    isOpen: false
   }),
 
   computed: {
@@ -39,8 +55,29 @@ export default {
       return this.$route.name;
     },
 
-    allProjectRoutesOrLanding() {
-      return this.$router.options.routes.filter(route => route?.meta?.isProject || route?.meta?.isLanding);
+    allProjectRoutes() {
+      return this.$router.options.routes.filter(route => route?.meta?.isProject);
+    },
+
+    landingRoute() {
+      return this.$router.options.routes.find(route => route?.meta?.isLanding);
+    },
+
+    aggregatedProjectRoutesByCreatedOn() {
+      return Object.entries(
+        this.allProjectRoutes.reduce((accumulator, route) => {
+          const year = route?.meta?.createdOn.getFullYear();
+
+          return {
+            ...accumulator,
+            [year]: [...(accumulator?.[year]?.length ? accumulator[year] : []), route]
+          };
+        }, {})
+      )
+        .map(([key, value]) => {
+          return [key, value.slice().sort((a, b) => b?.meta?.createdOn - a?.meta?.createdOn)];
+        })
+        .reverse();
     },
 
     menuIcon() {
@@ -92,8 +129,9 @@ $app-navigation-width: 7.5rem;
 
 .app-navigation {
   position: fixed;
+  z-index: 100; // Make sure the app navigation is above any content.
 
-  font-family: 'Lora';
+  font-family: 'Lora', serif;
 
   @media (map-get($viewport, 'min-width-7')) {
     top: 0;
@@ -105,25 +143,28 @@ $app-navigation-width: 7.5rem;
 }
 
 .project-container {
-  overflow-x: hidden;
-  overflow-y: auto;
   position: absolute;
   top: 0;
 
-  background: #20272e;
+  overflow-x: hidden;
+  overflow-y: auto;
+
   white-space: nowrap;
+
+  background: #20272e;
+
   transition: all 0.25s ease;
 
   @media (map-get($viewport, 'min-width-7')) {
+    width: 0;
     height: 100%;
     margin-left: $app-navigation-width;
-    width: 0;
   }
 
   @media (map-get($viewport, 'max-width-7')) {
+    width: 100%;
     height: 0;
     margin-top: $app-navigation-width;
-    width: 100%;
   }
 
   .active & {
@@ -140,24 +181,55 @@ $app-navigation-width: 7.5rem;
 .project-list {
   margin: 0;
   padding: 2rem 0;
-  transition: opacity 0.2s ease 0.2s;
 
   list-style-type: none;
   opacity: 0;
+
+  transition: opacity 0.2s ease 0.2s;
 
   .active & {
     opacity: 1;
   }
 }
 
+.nested-list {
+  padding: 0 2rem;
+}
+
+.year-category {
+  display: grid;
+  grid-template-columns: [label] min-content [content] 1fr;
+  align-items: center;
+  margin: 0;
+  padding: 1rem 0;
+
+  list-style-type: none;
+
+  .item {
+    grid-column: content;
+  }
+}
+
+.section-label {
+  position: sticky;
+  top: 2rem;
+
+  grid-column: label;
+
+  color: #ff8c7d;
+  font-size: clamp(2.5rem, 3vw, 4rem);
+  text-decoration: none;
+}
+
 .link {
   display: block;
   padding: 0.5rem 2rem;
-  transition: all 0.05s ease-in-out;
 
   color: #fff;
   font-size: clamp(2.5rem, 3vw, 4rem);
   text-decoration: none;
+
+  transition: all 0.05s ease-in-out;
 
   @media (map-get($viewport, 'min-width-7')) {
     opacity: 0.5;
@@ -165,60 +237,80 @@ $app-navigation-width: 7.5rem;
     &:hover {
       padding-left: 4rem;
 
-      backdrop-filter: brightness(1.2);
       opacity: 1;
     }
   }
 }
 
 .router-link-exact-active {
-  opacity: 0.5;
-  pointer-events: none;
   text-decoration: line-through;
+
+  opacity: 0.5;
+
+  pointer-events: none;
 }
 
 .sidebar {
-  align-items: center;
   display: inline-grid;
-  gap: 0 2rem;
-  grid: 1fr / [menu] 1fr [title] 4fr [selector] 2fr;
-  height: $app-navigation-width;
+  grid: 1fr / [menu] 2fr [title] 5fr [selector] 2fr;
+  align-items: center;
   justify-content: space-between;
   width: 100vw;
+  height: $app-navigation-width;
 
   background: #1b2127;
 
   @media (map-get($viewport, 'min-width-7')) {
-    gap: 2rem 0;
-    grid: [menu] 1fr [title] 4fr [selector] 2fr / 1fr;
-    height: 100vh;
+    grid: [menu] 2fr [title] 5fr [selector] 2fr / 1fr;
     width: $app-navigation-width;
+    height: 100vh;
   }
 }
 
 .menu-toggle {
+  display: block;
   grid-area: menu;
+  padding-left: 1.5rem;
+
+  text-align: center;
 
   cursor: pointer;
+
   user-select: none;
+
+  @media (map-get($viewport, 'min-width-7')) {
+    padding-top: 1.5rem;
+    padding-left: 0;
+  }
 }
 
 .project-selector {
+  display: flex;
+  flex-flow: row nowrap;
   grid-area: selector;
+  padding-right: 1.5rem;
+
+  text-align: center;
 
   user-select: none;
+
+  @media (map-get($viewport, 'min-width-7')) {
+    flex-flow: column nowrap;
+    padding-right: 0;
+    padding-bottom: 1.5rem;
+  }
 }
 
 .menu-toggle,
 .project-selector {
-  display: block;
-  padding: 1.5rem;
+}
 
-  text-align: center;
+.menu-icon {
+  color: #fff;
+  font-size: clamp(3rem, 3vw, 4rem);
 
-  .material-icons {
-    color: #fff;
-    font-size: clamp(3rem, 3vw, 4rem);
+  &:active {
+    filter: brightness(0.5);
   }
 }
 
@@ -227,32 +319,34 @@ $app-navigation-width: 7.5rem;
   margin: 0.25rem;
 
   cursor: pointer;
+
+  &:active {
+    filter: brightness(0.5);
+  }
 }
 
 .project-title {
   grid-area: title;
-  transform: rotate(180deg);
-
-  display: block;
-  line-height: $app-navigation-width;
-  overflow: hidden;
   width: $app-navigation-width;
-  writing-mode: vertical-rl;
+  overflow: hidden;
 
   color: #fff;
-  font-family: 'Archivo Black';
-  font-size: clamp(2rem, 3vw, 3rem);
-  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 3rem);
+  font-family: 'Archivo Black', sans-serif;
+  line-height: $app-navigation-width;
   letter-spacing: 2px;
-  text-align: center;
-  text-overflow: ellipsis;
-  text-transform: uppercase;
   white-space: nowrap;
+  text-align: center;
+  text-transform: uppercase;
+  text-overflow: ellipsis;
+
+  transform: rotate(180deg);
+  writing-mode: vertical-rl;
 
   @media (map-get($viewport, 'max-width-7')) {
-    transform: none;
-
     width: 100%;
+
+    transform: none;
 
     writing-mode: horizontal-tb;
   }
