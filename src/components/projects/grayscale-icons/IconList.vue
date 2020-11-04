@@ -1,9 +1,10 @@
 <template lang="pug">
-  .home
+ul
+  slot
 </template>
 
 <script>
 export default {
-  name: 'Home'
+  name: 'IconList'
 };
 </script>
