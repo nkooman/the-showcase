@@ -9,6 +9,13 @@ module.exports = {
       extensions: ['.js', '.vue', '.json']
     }
   },
+  chainWebpack: config => {
+    config.plugin('html').tap(args => {
+      const newArgs = [{ ...args[0], title: 'The Showcase' }];
+
+      return newArgs;
+    });
+  },
   css: {
     loaderOptions: {
       scss: {
