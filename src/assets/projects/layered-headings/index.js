@@ -16,6 +16,6 @@ export const images = [
   {
     src: universitiTeknologiPetronas,
     alt: 'universiti teknologi petronas',
-    title: 'University Teknologi Petronas'
+    title: 'Universiti Teknologi Petronas'
   }
 ];
