@@ -25,6 +25,8 @@ export default {
 $font-color: #00d2be;
 
 .layered-headings {
+  overflow-x: hidden;
+
   background: #464646;
 }
 

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Landing from '@/views/Landing';
 import GrayscaleIcons from '@/views/projects/GrayscaleIcons';
 import LayeredHeadings from '@/views/projects/LayeredHeadings';
+import CityPop from '@/views/projects/CityPop';
 
 Vue.use(VueRouter);
 
@@ -31,6 +32,15 @@ const routes = [
     meta: {
       isProject: true,
       createdOn: new Date('10/27/2020')
+    }
+  },
+  {
+    path: '/city-pop',
+    name: 'City Pop',
+    component: CityPop,
+    meta: {
+      isProject: true,
+      createdOn: new Date('11/6/2020')
     }
   }
 ];
