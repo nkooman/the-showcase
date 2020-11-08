@@ -85,6 +85,12 @@ export default {
     }
   },
 
+  watch: {
+    isOpen(value) {
+      this.$emit('state-change', value);
+    }
+  },
+
   methods: {
     closeNavigation() {
       this.isOpen = false;
