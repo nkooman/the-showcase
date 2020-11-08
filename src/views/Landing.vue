@@ -12,7 +12,6 @@
         :icon-before="'link'"
         :is-external="true")
       | !
-
 </template>
 
 <script>

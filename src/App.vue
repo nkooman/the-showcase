@@ -59,17 +59,17 @@ $app-navigation-width: 7.5rem;
 
 .slide-enter-active,
 .slide-leave-active {
-  transition: all 0.3s;
+  transition: all 0.2s;
 }
 
 .slide-enter,
 .slide-leave-to {
   @media (map-get($viewport, 'min-width-7')) {
-    transform: translateX(100%);
+    transform: translateX(-100%);
   }
 
   @media (map-get($viewport, 'max-width-7')) {
-    transform: translateY(100%);
+    transform: translateY(-100%);
   }
 }
 </style>
