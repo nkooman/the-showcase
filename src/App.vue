@@ -1,7 +1,7 @@
 <template lang="pug">
   #app
-    AppNavgiation
-    .content-wrapper
+    AppNavgiation(@state-change="navigationStateChange")
+    .content-wrapper(:class="{ 'navigation-open': navigationState }")
       transition(name="slide" mode="out-in")
         router-view
 </template>
@@ -11,8 +11,19 @@ import AppNavgiation from '@/components/AppNavigation';
 
 export default {
   name: 'App',
+
   components: {
     AppNavgiation
+  },
+
+  data: () => ({
+    navigationState: false
+  }),
+
+  methods: {
+    navigationStateChange(value) {
+      this.navigationState = value;
+    }
   }
 };
 </script>
@@ -40,6 +51,10 @@ $app-navigation-width: 7.5rem;
   @media (map-get($viewport, 'max-width-7')) {
     padding-top: $app-navigation-width;
   }
+}
+
+.navigation-open {
+  overflow: hidden;
 }
 
 .slide-enter-active,
