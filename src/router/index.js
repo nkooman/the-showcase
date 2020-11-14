@@ -1,11 +1,8 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
+import { createWebHistory, createRouter } from 'vue-router';
 import Landing from '@/views/Landing';
 import GrayscaleIcons from '@/views/projects/GrayscaleIcons';
 import LayeredHeadings from '@/views/projects/LayeredHeadings';
 import CityPop from '@/views/projects/CityPop';
-
-Vue.use(VueRouter);
 
 const routes = [
   {
@@ -45,6 +42,7 @@ const routes = [
   }
 ];
 
-export const router = new VueRouter({
+export const router = createRouter({
+  history: createWebHistory(),
   routes
 });
