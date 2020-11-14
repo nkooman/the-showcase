@@ -1,11 +1,11 @@
 <template lang="pug">
-  a.link(
-    :href="href"
-    :title="title"
-    :target="isExternal ? '_blank' : '_self'")
-    MaterialIcon.icon(v-if="iconBefore") {{ iconBefore }}
-    span.text(v-if="text") {{ text }}
-    MaterialIcon.icon(v-if="iconAfter") {{ iconAfter }}
+a.link(
+  :href="href"
+  :title="title"
+  :target="isExternal ? '_blank' : '_self'")
+  MaterialIcon.icon(v-if="iconBefore") {{ iconBefore }}
+  span.text(v-if="text") {{ text }}
+  MaterialIcon.icon(v-if="iconAfter") {{ iconAfter }}
 </template>
 
 <script>

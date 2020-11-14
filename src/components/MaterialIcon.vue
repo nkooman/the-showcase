@@ -1,6 +1,6 @@
 <template lang="pug">
-  i.material-icons
-    slot
+i.material-icons
+  slot
 </template>
 
 <script>
