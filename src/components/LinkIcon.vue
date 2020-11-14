@@ -1,17 +1,19 @@
 <template lang="pug">
-  a.link(
-    :href="href"
-    :title="title"
-    :target="isExternal ? '_blank' : '_self'")
-    MaterialIcon.icon(v-if="iconBefore") {{ iconBefore }}
-    span.text(v-if="text") {{ text }}
-    MaterialIcon.icon(v-if="iconAfter") {{ iconAfter }}
+a.link(
+  :href="href"
+  :title="title"
+  :target="isExternal ? '_blank' : '_self'")
+  MaterialIcon.icon(v-if="iconBefore") {{ iconBefore }}
+  span.text(v-if="text") {{ text }}
+  MaterialIcon.icon(v-if="iconAfter") {{ iconAfter }}
 </template>
 
-<script>
-import MaterialIcon from '@/components/MaterialIcon';
+<script lang="ts">
+import { defineComponent } from 'vue';
 
-export default {
+import MaterialIcon from '@/components/MaterialIcon.vue';
+
+export default defineComponent({
   name: 'LinkIcon',
 
   components: {
@@ -32,7 +34,7 @@ export default {
     iconAfter: String,
     isExternal: Boolean
   }
-};
+});
 </script>
 
 <style lang="scss" scoped>

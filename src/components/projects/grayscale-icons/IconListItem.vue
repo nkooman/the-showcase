@@ -2,9 +2,12 @@
 li: a.link(:href="href" target="_blank"): img.image(:src="src" :alt="alt")
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   name: 'IconListItem',
+
   props: {
     href: {
       type: String,
@@ -19,7 +22,7 @@ export default {
       required: true
     }
   }
-};
+});
 </script>
 
 <style lang="scss" scoped>

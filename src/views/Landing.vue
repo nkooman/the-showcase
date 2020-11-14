@@ -1,29 +1,31 @@
 <template lang="pug">
-  .landing
-    span.welcome Welcome to
-    h1.title The Showcase
-    p.description The goal of this space is to present different ideas I have for UI/UX design and small CSS or JS projects.
-    p.github You can check out the source code on
-      = ' '
-      LinkIcon(
-        :href="'https://github.com/nkooman/the-showcase/'"
-        :title="'Link to the GitHub repository'"
-        :text="'GitHub'"
-        :icon-before="'link'"
-        :is-external="true")
-      | !
+.landing
+  span.welcome Welcome to
+  h1.title The Showcase
+  p.description The goal of this space is to present different ideas I have for UI/UX design and small CSS or JS projects.
+  p.github You can check out the source code on
+    = ' '
+    LinkIcon(
+      :href="'https://github.com/nkooman/the-showcase/'"
+      :title="'Link to the GitHub repository'"
+      :text="'GitHub'"
+      :icon-before="'link'"
+      :is-external="true")
+    | !
 </template>
 
-<script>
-import LinkIcon from '@/components/LinkIcon';
+<script lang="ts">
+import { defineComponent } from 'vue';
 
-export default {
+import LinkIcon from '@/components/LinkIcon.vue';
+
+export default defineComponent({
   name: 'Landing',
 
   components: {
     LinkIcon
   }
-};
+});
 </script>
 
 <style lang="scss" scoped>
