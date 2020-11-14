@@ -1,9 +1,10 @@
 <template lang="pug">
-  #app
-    AppNavgiation(@state-change="navigationStateChange")
-    .content-wrapper(:class="{ 'navigation-open': navigationState }")
+#app
+  AppNavgiation(@state-change="navigationStateChange")
+  .content-wrapper(:class="{ 'navigation-open': navigationState }")
+    router-view(v-slot="{ Component }")
       transition(name="slide" mode="out-in")
-        router-view
+        component(:is="Component")
 </template>
 
 <script>
