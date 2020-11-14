@@ -14,8 +14,12 @@
         .afterimage.offset-1
 </template>
 
-<script>
-export default {};
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  name: 'CityPop'
+});
 </script>
 
 <style lang="scss" scoped>

@@ -1,8 +1,8 @@
 import { createWebHistory, createRouter } from 'vue-router';
-import Landing from '@/views/Landing';
-import GrayscaleIcons from '@/views/projects/GrayscaleIcons';
-import LayeredHeadings from '@/views/projects/LayeredHeadings';
-import CityPop from '@/views/projects/CityPop';
+import Landing from '@/views/Landing.vue';
+import GrayscaleIcons from '@/views/projects/GrayscaleIcons.vue';
+import LayeredHeadings from '@/views/projects/LayeredHeadings.vue';
+import CityPop from '@/views/projects/CityPop.vue';
 
 const routes = [
   {

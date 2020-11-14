@@ -7,16 +7,18 @@
       h1.title.back {{ title }}
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
+
 import { images } from '@/assets/projects/layered-headings';
 
-export default {
+export default defineComponent({
   name: 'LayeredHeadings',
 
   data: () => ({
     images
   })
-};
+});
 </script>
 
 <style lang="scss" scoped>

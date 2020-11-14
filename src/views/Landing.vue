@@ -14,16 +14,18 @@
     | !
 </template>
 
-<script>
-import LinkIcon from '@/components/LinkIcon';
+<script lang="ts">
+import { defineComponent } from 'vue';
 
-export default {
+import LinkIcon from '@/components/LinkIcon.vue';
+
+export default defineComponent({
   name: 'Landing',
 
   components: {
     LinkIcon
   }
-};
+});
 </script>
 
 <style lang="scss" scoped>

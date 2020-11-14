@@ -3,8 +3,10 @@
   .layer(v-for="color in colors")
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   name: 'StackedTitle',
 
   props: {
@@ -18,7 +20,7 @@ export default {
     colors: {
       type: Array,
       required: true,
-      validator(arr) {
+      validator(arr: string[]) {
         // Color Hexcode Regex
         const regex = /^#[0-9a-f]{3,6}$/i;
 
@@ -26,7 +28,7 @@ export default {
       }
     }
   }
-};
+});
 </script>
 
 <style lang="scss" scoped>
