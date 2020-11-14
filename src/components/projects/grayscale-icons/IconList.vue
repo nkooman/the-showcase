@@ -1,10 +1,11 @@
 <template lang="pug">
-ul
-  slot
+ul: slot
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   name: 'IconList'
-};
+});
 </script>

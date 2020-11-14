@@ -38,10 +38,13 @@ nav.app-navigation(:class="{ active: isOpen }")
                 | {{ name }}
 </template>
 
-<script>
-import MaterialIcon from '@/components/MaterialIcon';
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { RouteRecordRaw } from 'vue-router';
 
-export default {
+import MaterialIcon from '@/components/MaterialIcon.vue';
+
+export default defineComponent({
   name: 'AppNavigation',
 
   components: {
@@ -53,21 +56,24 @@ export default {
   }),
 
   computed: {
-    currentRouteName() {
-      return this.$route.name;
+    // TODO: Make this just type string.
+    currentRouteName(): string | symbol | null | undefined {
+      return this.$router.currentRoute.value.name;
     },
 
-    allProjectRoutes() {
+    allProjectRoutes(): RouteRecordRaw[] {
       return this.$router.options.routes.filter(route => route?.meta?.isProject);
     },
 
-    landingRoute() {
+    // TODO: Make this type just RouteRecordRaw.
+    landingRoute(): RouteRecordRaw | undefined {
       return this.$router.options.routes.find(route => route?.meta?.isLanding);
     },
 
+    // TODO: Removed the any typing.
     aggregatedProjectRoutesByCreatedOn() {
       return Object.entries(
-        this.allProjectRoutes.reduce((accumulator, route) => {
+        this.allProjectRoutes.reduce((accumulator: any, route: RouteRecordRaw) => {
           const year = route?.meta?.createdOn.getFullYear();
 
           return {
@@ -77,12 +83,12 @@ export default {
         }, {})
       )
         .map(([key, value]) => {
-          return [key, value.slice().sort((a, b) => b?.meta?.createdOn - a?.meta?.createdOn)];
+          return [key, (value as RouteRecordRaw[]).slice().sort((a, b) => b?.meta?.createdOn - a?.meta?.createdOn)];
         })
         .reverse();
     },
 
-    menuIcon() {
+    menuIcon(): 'close' | 'menu' {
       return this.isOpen ? 'close' : 'menu';
     }
   },
@@ -126,7 +132,7 @@ export default {
       this.$router.push({ path });
     }
   }
-};
+});
 </script>
 
 <style lang="scss" scoped>

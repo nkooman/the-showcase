@@ -7,10 +7,12 @@
         component(:is="Component")
 </template>
 
-<script>
-import AppNavgiation from '@/components/AppNavigation';
+<script lang="ts">
+import { defineComponent } from 'vue';
 
-export default {
+import AppNavgiation from '@/components/AppNavigation.vue';
+
+export default defineComponent({
   name: 'App',
 
   components: {
@@ -22,11 +24,11 @@ export default {
   }),
 
   methods: {
-    navigationStateChange(value) {
+    navigationStateChange(value: boolean) {
       this.navigationState = value;
     }
   }
-};
+});
 </script>
 
 <style lang="scss">
