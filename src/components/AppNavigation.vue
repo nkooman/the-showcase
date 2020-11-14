@@ -1,39 +1,41 @@
 <template lang="pug">
-  nav.app-navigation(:class="{ active: isOpen }")
-    .sidebar
-      a.menu-toggle(role="button" @click="toggleNavigation" aria-label="Toggle menu")
-        MaterialIcon.menu-icon {{ menuIcon }}
-      .project-title(:title="currentRouteName") {{ currentRouteName }}
-      .project-selector
-        a.backward(role="button" aria-label="Navigate backward" @click="navigateBackward")
-          MaterialIcon.menu-icon chevron_left
-        a.forward(role="button" aria-label="Navigate forward" @click="navigateForward")
-          MaterialIcon.menu-icon chevron_right
-    .project-container
-      ul.project-list(v-if="isOpen")
-        router-link(
-          exact
-          v-slot="{ href, navigate, isActive, isExactActive }"
-          :to="landingRoute.path")
-          li.item.landing-link(:class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active']")
-            a.link(
-              :href="href"
-              @click="[navigate($event), closeNavigation()]")
-              | {{ landingRoute.name }}
-        li.nested-list
-          ul.year-category(v-for="[year, routes] in aggregatedProjectRoutesByCreatedOn")
-            li.section-label(:key="Math.random()") {{ year }}
-            router-link(
-              exact
-              v-for="{ path, name } in routes"
-              v-slot="{ href, navigate, isActive, isExactActive }"
-              :to="path"
-              :key="Math.random()")
-              li.item(:class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active']")
-                a.link(
-                  :href="href"
-                  @click="[navigate($event), closeNavigation()]")
-                  | {{ name }}
+nav.app-navigation(:class="{ active: isOpen }")
+  .sidebar
+    a.menu-toggle(role="button" @click="toggleNavigation" aria-label="Toggle menu")
+      MaterialIcon.menu-icon {{ menuIcon }}
+    .project-title(:title="currentRouteName") {{ currentRouteName }}
+    .project-selector
+      a.backward(role="button" aria-label="Navigate backward" @click="navigateBackward")
+        MaterialIcon.menu-icon chevron_left
+      a.forward(role="button" aria-label="Navigate forward" @click="navigateForward")
+        MaterialIcon.menu-icon chevron_right
+  .project-container
+    ul.project-list(v-if="isOpen")
+      router-link(
+        exact
+        custom
+        v-slot="{ href, navigate, isActive, isExactActive }"
+        :to="landingRoute.path")
+        li.item.landing-link(:class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active']")
+          a.link(
+            :href="href"
+            @click="[navigate($event), closeNavigation()]")
+            | {{ landingRoute.name }}
+      li.nested-list
+        ul.year-category(v-for="[year, routes] in aggregatedProjectRoutesByCreatedOn")
+          li.section-label(:key="Math.random()") {{ year }}
+          router-link(
+            exact
+            custom
+            v-for="{ path, name } in routes"
+            v-slot="{ href, navigate, isActive, isExactActive }"
+            :to="path"
+            :key="Math.random()")
+            li.item(:class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active']")
+              a.link(
+                :href="href"
+                @click="[navigate($event), closeNavigation()]")
+                | {{ name }}
 </template>
 
 <script>
