@@ -71,9 +71,10 @@ export default defineComponent({
     },
 
     // TODO: Removed the any typing.
+    // TODO: Fix "Property 'reduce' does not exist on type '() => RouteRecordRaw[]'".
     aggregatedProjectRoutesByCreatedOn() {
       return Object.entries(
-        this.allProjectRoutes.reduce((accumulator: any, route: RouteRecordRaw) => {
+        ((this.allProjectRoutes as unknown) as RouteRecordRaw[]).reduce((accumulator: any, route: RouteRecordRaw) => {
           const year = route?.meta?.createdOn.getFullYear();
 
           return {
