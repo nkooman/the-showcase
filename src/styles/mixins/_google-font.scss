@@ -35,15 +35,15 @@ $google-font-subsets: (
 //
 @mixin google-font(
   $name: null,
-  // string (unquoted will work too)
-    $weights: 400,
-  // list or numeric value (100 200 300 400 ...)
-    $styles: normal,
-  // list or string (normal and or italic)
-    $text: null // string (don\'t forget to unescape )
+
+  $weights: 400,
+
+  $styles: normal,
+
+  $text: null
 ) {
   // base url
-  $URL: '//fonts.googleapis.com/css?family=';
+  $URL: '//fonts.googleapis.com/css2?family=';
 
   // create global variables
   @if not variable-exists(__gf__combine) {
@@ -61,6 +61,7 @@ $google-font-subsets: (
   // append italic to weights
   @if index($styles, italic) and not str-index($weights + '', i) {
     $wgt: if(index($styles, normal), $weights, ());
+
     @each $weight in $weights {
       $wgt: append($wgt, $weight + i);
     }
@@ -114,6 +115,7 @@ $google-font-subsets: (
     // replace name whitespaces
     $name: if(type-of($name) == string, unquote($name), $name);
     $name: __gf__str-replace(inspect($name), ' ', '+');
+
     @if $__gf__combine and not $text {
       // add weights to combine map
       $wgt: map-get($__gf__map, $name) or ();
@@ -124,20 +126,25 @@ $google-font-subsets: (
           $name: $wgt
         )
       ) !global;
-    } @else {
+    }
+
+    @else {
       // create query
       $query: '';
+
       @each $weight in $weights {
-        $query: $query + if($query != '', ',', '') + $weight;
+        $query: $query + if($query != '', ';', '') + $weight;
       }
       $query: __gf__str-replace($query, ' ');
-      $query: $name + if(str-length($query) > 0 and $query != '400', ':' + $query, '');
+      $query: $name + if(str-length($query) > 0 and $query != '400', ':wght@' + $query, '');
       // create single immport
       @at-root {
-        @import url($URL+$query+if($text, $text, '')+$subset);
+        @import url($URL+$query+if($text, $text, '') +$subset);
       }
     }
-  } @else {
+  }
+
+  @else {
     // set combine flag
     $__gf__combine: true !global;
     // nested includes
@@ -145,11 +152,12 @@ $google-font-subsets: (
     // convert combine map to query
     // (remove weights if just 400)
     $query: '';
+
     @each $font, $weights in $__gf__map {
       $query: $query +
         if($query != '', '|', '') +
         $font +
-        if(length($weights) == 1 and (nth($weights, 1) == '400'), '', ':' + join((), $weights, comma));
+        if(length($weights) == 1 and (nth($weights, 1) == '400'), '', ':wght@' + join((), $weights, ';'));
     }
     // remove query whitespaces
     $query: __gf__str-replace($query, ' ');
@@ -167,31 +175,37 @@ $google-font-subsets: (
 //
 @function __gf__list-unique($list) {
   $result: ();
+
   @each $item in $list {
     @if not index($result, $item + '') {
       $result: append($result, $item + '');
     }
   }
+
   @each $item in $result {
     $result: set-nth($result, index($result, $item), unquote($item));
   }
+
   @return $result;
 }
 
 @function __gf__str-replace($string, $search, $replace: '') {
   $index: str-index($string, $search);
+
   @return if(
     $index,
     str-slice($string, 1, $index - 1) + $replace +
-      __gf__str-replace(str-slice($string, $index + str-length($search)), $search, $replace),
+    __gf__str-replace(str-slice($string, $index + str-length($search)), $search, $replace),
     $string
   );
 }
 
 @function __gf__str-explode($string) {
   $list: ();
+
   @for $i from 1 through str-length($string) {
     $list: append($list, str-slice($string, $i, $i));
   }
+
   @return $list;
 }

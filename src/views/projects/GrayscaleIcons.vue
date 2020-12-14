@@ -5,11 +5,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 import IconList from '@/components/projects/grayscale-icons/IconList.vue';
 import IconListItem from '@/components/projects/grayscale-icons/IconListItem.vue';
-import { images } from '@/assets/projects/grayscale-icons';
+import { images as grayscaleIcons } from '@/assets/projects/grayscale-icons';
 
 export default defineComponent({
   name: 'GrayscaleIcons',
@@ -19,9 +19,11 @@ export default defineComponent({
     IconListItem
   },
 
-  data: () => ({
-    images
-  })
+  setup() {
+    const images = ref(grayscaleIcons);
+
+    return { images };
+  }
 });
 </script>
 

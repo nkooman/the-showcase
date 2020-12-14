@@ -22,7 +22,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css2?family=Martel+Sans:wght@200;300;400;600;700;800;900&display=swap');
+@include google-font('Martel Sans', 900);
 
 $font-color: #00d2be;
 
@@ -59,11 +59,11 @@ $font-color: #00d2be;
 .heading {
   position: absolute;
   top: 5%;
-  right: 20%;
+  left: clamp(30rem, 80%, 85rem);
 
   @media (map-get($viewport, 'min-width-12')) {
     top: -2.5%;
-    right: 65%;
+    left: clamp(15rem, 50%, 40rem);
   }
 }
 

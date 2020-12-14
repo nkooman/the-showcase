@@ -4,13 +4,14 @@
   .content-wrapper(:class="{ 'navigation-open': navigationState }")
     router-view(v-slot="{ Component }")
       transition(name="slide" mode="out-in")
-        component(:is="Component")
+        keep-alive
+          component(:is="Component")
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 
-import AppNavgiation from '@/components/AppNavigation.vue';
+import AppNavgiation from '@/components/app-navigation/AppNavigation.vue';
 
 export default defineComponent({
   name: 'App',
@@ -19,14 +20,14 @@ export default defineComponent({
     AppNavgiation
   },
 
-  data: () => ({
-    navigationState: false
-  }),
+  setup() {
+    const navigationState = ref(false);
 
-  methods: {
-    navigationStateChange(value: boolean) {
-      this.navigationState = value;
-    }
+    const navigationStateChange = (value: boolean) => {
+      navigationState.value = value;
+    };
+
+    return { navigationState, navigationStateChange };
   }
 });
 </script>
@@ -62,7 +63,7 @@ $app-navigation-width: 7.5rem;
 
 .slide-enter-active,
 .slide-leave-active {
-  transition: all 0.2s;
+  transition: all 0.25s;
 }
 
 .slide-enter,
