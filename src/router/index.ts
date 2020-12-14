@@ -3,6 +3,7 @@ import Landing from '@/views/Landing.vue';
 import GrayscaleIcons from '@/views/projects/GrayscaleIcons.vue';
 import LayeredHeadings from '@/views/projects/LayeredHeadings.vue';
 import CityPop from '@/views/projects/CityPop.vue';
+import Gridlock from '@/views/projects/Gridlock.vue';
 
 const routes = [
   {
@@ -38,6 +39,15 @@ const routes = [
     meta: {
       isProject: true,
       createdOn: new Date('11/6/2020')
+    }
+  },
+  {
+    path: '/gridlock',
+    name: 'Gridlock',
+    component: Gridlock,
+    meta: {
+      isProject: true,
+      createdOn: new Date('11/10/2020')
     }
   }
 ];
