@@ -44,7 +44,7 @@ export default defineComponent({
     const getPathByIndex = (index: number) => allProjectRoutes.value[index].path;
 
     const navigateBackward = () => {
-      if (!isStartOfRoutes.value) return;
+      if (isStartOfRoutes.value) return;
 
       const path = getPathByIndex(currentRouteIndex.value - 1);
 
@@ -52,7 +52,6 @@ export default defineComponent({
     };
 
     const navigateForward = () => {
-      // Add 1 since index values will start at 0.
       if (isEndOfRoutes.value) return;
 
       const path = getPathByIndex(currentRouteIndex.value + 1);
