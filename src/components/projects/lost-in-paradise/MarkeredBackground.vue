@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, onUpdated } from 'vue';
+import { defineComponent, ref, onMounted, onUpdated, computed } from 'vue';
 
 const rough = require('roughjs/bundled/rough.cjs');
 
@@ -21,7 +21,13 @@ export default defineComponent({
   setup(props) {
     const canvas = ref<HTMLCanvasElement>();
     const wrapper = ref<HTMLDivElement>();
-    const canvasSize = ref();
+    const roughCanvas = ref();
+
+    const canvasSize = computed(() => ({
+      height: wrapper.value?.offsetHeight,
+      width: wrapper.value?.offsetWidth
+    }));
+
     const config = {
       options: {
         roughness: 3,
@@ -39,22 +45,18 @@ export default defineComponent({
     const draw = () => {
       if (!canvas.value || !wrapper.value) return;
 
-      const context = canvas.value.getContext('2d');
-
-      if (context) {
-        context.clearRect(0, 0, canvas.value.width, canvas.value.height);
-      }
-
-      const roughCanvas = rough.canvas(canvas.value, config);
-
       const height = wrapper.value.offsetHeight;
       const width = wrapper.value.offsetWidth;
 
-      canvasSize.value = { height, width };
-      roughCanvas.rectangle(width * 0.1, height * 0.1, width * 0.8, height * 0.8);
+      roughCanvas.value.rectangle(width * 0.1, height * 0.1, width * 0.8, height * 0.8);
     };
 
-    onMounted(draw);
+    onMounted(() => {
+      roughCanvas.value = rough.canvas(canvas.value, config);
+
+      draw();
+    });
+
     onUpdated(draw);
 
     return {
