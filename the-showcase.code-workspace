@@ -18,6 +18,18 @@
       "**/node_modules/": true,
       "**/obj/": true,
       "**/.expo*/": true
-    }
+    },
+    "[jsonc]": {
+      "editor.formatOnSave": true
+    },
+    "[json]": {
+      "editor.formatOnSave": true
+    },
+    "[vue]": {
+      "editor.formatOnSave": true
+    },
+    "[javascript]": {
+      "editor.formatOnSave": true
+    },
   }
 }

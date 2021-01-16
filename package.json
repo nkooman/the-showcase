@@ -13,6 +13,7 @@
     "vue-router": "^4.0.0-rc.2"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.12.7",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
     "@vue/cli-plugin-babel": "^4.5.8",
@@ -32,6 +33,7 @@
     "prettier": "^1.19.1",
     "pug": "^2.0.4",
     "pug-plain-loader": "^1.0.0",
+    "roughjs": "^4.3.1",
     "sass-loader": "^8.0.2",
     "stylelint": "^13.3.0",
     "stylelint-config-rational-order": "^0.1.2",
