@@ -1,26 +1,4 @@
-<template lang="pug">
-.lost-in-paradise
-  MarkeredBackground.title(:stroke="'#252226'" :fill="'#46c1d0'" :animateOnHover="true")
-    h1 Lost in Paradise
-  MarkeredPath(:stroke="'#252226'" :fill="'#ee5456'" :animateOnHover="true" :path="path")
-</template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-import MarkeredBackground from '@/components/projects/lost-in-paradise/MarkeredBackground.vue';
-import MarkeredPath from '@/components/projects/lost-in-paradise/MarkeredPath.vue';
-// import shrimp from 'src/assets/projects/lost-in-paradise/shrimp';
-
-export default defineComponent({
-  name: 'LostInParadise',
-  components: {
-    MarkeredBackground,
-    MarkeredPath
-  },
-
-  setup() {
-    const path = ref<string>(
-      `M 94.83,2.29
+export default `M 94.83,2.29
 C 93.44,2.54 90.74,3.19 88.85,3.74
   87.00,4.29 83.91,4.99 81.97,5.29
   74.79,6.48 67.81,9.42 62.22,13.66
@@ -170,48 +148,4 @@ C 96.68,147.48 45.07,184.83 44.43,184.83
   43.98,184.83 43.23,184.63 42.83,184.33
   41.23,183.33 43.43,181.04 52.25,174.61
   66.31,164.39 76.93,157.51 90.99,149.43
-  98.47,145.14 99.97,144.39 98.92,145.39 Z`.replace(/\r?\n|\r/g, '')
-    );
-
-    return { path };
-  }
-});
-</script>
-
-<style lang="scss" scoped>
-@include google-font('Josefin Sans', 400);
-
-$blue: #46c1d0;
-$yellow: #fede35;
-$red: #ee5456;
-$gray: #525252;
-$black: #252226;
-$white: #f9f9f9;
-
-.lost-in-paradise {
-  display: grid;
-  gap: 5rem;
-  width: 100%;
-  height: 100%;
-
-  font-family: 'Josefin Sans', sans-serif;
-
-  background: $yellow;
-  place-items: center;
-  place-content: center;
-}
-
-.title {
-  font-weight: 900;
-
-  font-size: 3rem;
-  // text-transform: uppercase;
-
-  h1 {
-    width: max-content;
-    margin: 0 auto;
-
-    text-align: center;
-  }
-}
-</style>
+  98.47,145.14 99.97,144.39 98.92,145.39 Z`;

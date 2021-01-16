@@ -1,12 +1,12 @@
 <template lang="pug">
-.markered-background
+.markered-background(:style="containerSize" @mouseover="hover = true" @mouseleave="hover = false")
   canvas.canvas(ref="canvas" v-bind="canvasSize")
   .wrapper(ref="wrapper")
     slot
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, onUpdated, computed } from 'vue';
+import { defineComponent, ref, onMounted, onUpdated, computed, watch } from 'vue';
 
 const rough = require('roughjs/bundled/rough.cjs');
 
@@ -15,7 +15,8 @@ export default defineComponent({
 
   props: {
     stroke: String,
-    fill: String
+    fill: String,
+    animateOnHover: Boolean
   },
 
   setup(props) {
@@ -28,9 +29,14 @@ export default defineComponent({
       width: wrapper.value?.offsetWidth
     }));
 
+    const containerSize = computed(() => ({
+      height: `${wrapper.value?.offsetHeight}px`,
+      width: `${wrapper.value?.offsetWidth}px`
+    }));
+
     const config = {
       options: {
-        roughness: 3,
+        roughness: 6,
         bowing: 1,
         stroke: props.stroke,
         strokeWidth: 3,
@@ -48,7 +54,7 @@ export default defineComponent({
       const height = wrapper.value.offsetHeight;
       const width = wrapper.value.offsetWidth;
 
-      roughCanvas.value.rectangle(width * 0.1, height * 0.1, width * 0.8, height * 0.8);
+      roughCanvas.value.rectangle(width * 0.15, height * 0.15, width * 0.7, height * 0.7);
     };
 
     onMounted(() => {
@@ -59,10 +65,27 @@ export default defineComponent({
 
     onUpdated(draw);
 
+    const hover = ref<boolean>();
+    const intervalId = ref<number>();
+
+    watch(hover, value => {
+      if (value && props.animateOnHover) {
+        intervalId.value = setInterval(() => {
+          roughCanvas.value.ctx.clearRect(0, 0, roughCanvas.value.canvas.width, roughCanvas.value.canvas.height);
+
+          draw();
+        }, 75);
+      } else {
+        clearInterval(intervalId.value);
+      }
+    });
+
     return {
       canvas,
       wrapper,
-      canvasSize
+      canvasSize,
+      containerSize,
+      hover
     };
   }
 });
@@ -80,5 +103,9 @@ export default defineComponent({
   left: 50%;
 
   transform: translate(-50%, -50%);
+}
+
+.wrapper {
+  padding: 7rem 14rem;
 }
 </style>
