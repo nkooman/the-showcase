@@ -1,12 +1,15 @@
 <template lang="pug">
 .markered-background(:style="containerSize" @mouseover="hover = true" @mouseleave="hover = false")
-  canvas.canvas(ref="canvas" v-bind="canvasSize")
+  canvas.canvas(ref="canvasElement" v-bind="canvasSize")
   .wrapper(ref="wrapper")
     slot
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, onUpdated, computed, watch } from 'vue';
+/// <reference types="resize-observer-browser" />
+import { defineComponent, ref, onMounted, computed, watch } from 'vue';
+import { RoughCanvas } from 'roughjs/bin/canvas';
+import { Config } from 'roughjs/bin/core';
 
 const rough = require('roughjs/bundled/rough.cjs');
 
@@ -20,72 +23,106 @@ export default defineComponent({
   },
 
   setup(props) {
-    const canvas = ref<HTMLCanvasElement>();
+    const canvasElement = ref<HTMLCanvasElement>();
     const wrapper = ref<HTMLDivElement>();
-    const roughCanvas = ref();
+    const roughCanvas = ref<RoughCanvas>();
+
+    const height = ref(wrapper.value?.offsetHeight || 0);
+    const width = ref(wrapper.value?.offsetWidth || 0);
 
     const canvasSize = computed(() => ({
-      height: wrapper.value?.offsetHeight,
-      width: wrapper.value?.offsetWidth
+      height: height.value,
+      width: width.value
     }));
 
     const containerSize = computed(() => ({
-      height: `${wrapper.value?.offsetHeight}px`,
-      width: `${wrapper.value?.offsetWidth}px`
+      height: `${height.value}px`,
+      width: `${width.value}px`
     }));
 
-    const config = {
+    const config: Config = {
       options: {
-        roughness: 6,
-        bowing: 1,
+        roughness: 3,
+        bowing: 0.5,
         stroke: props.stroke,
         strokeWidth: 3,
         fill: props.fill,
         fillStyle: 'zigzag',
         fillWeight: 20,
         hachureAngle: -51,
-        hachureGap: 23
+        hachureGap: 23,
+        disableMultiStroke: true
       }
     };
 
-    const draw = () => {
-      if (!canvas.value || !wrapper.value) return;
-
-      const height = wrapper.value.offsetHeight;
-      const width = wrapper.value.offsetWidth;
-
-      roughCanvas.value.rectangle(width * 0.15, height * 0.15, width * 0.7, height * 0.7);
-    };
-
     onMounted(() => {
-      roughCanvas.value = rough.canvas(canvas.value, config);
-
-      draw();
+      roughCanvas.value = rough.canvas(canvasElement.value, config);
     });
 
-    onUpdated(draw);
+    const createMarkeredBackground = () =>
+      // Reduce size of rectangle to make sure that the fill stroke is not cut off on the edges.
+      roughCanvas.value?.rectangle(width.value * 0.05, height.value * 0.15, width.value * 0.9, height.value * 0.7);
 
-    const hover = ref<boolean>();
+    const draw = () => window.requestAnimationFrame(createMarkeredBackground);
+
+    const clearCanvas = () => {
+      if (!canvasElement.value) return;
+
+      const context = canvasElement.value.getContext('2d');
+      context?.clearRect(0, 0, context.canvas.width, context.canvas.height);
+    };
+
+    const hasDrawn = ref(false);
+
+    const initialDraw = () => {
+      if (hasDrawn.value) return;
+
+      draw();
+      hasDrawn.value = true;
+    };
+
+    onMounted(initialDraw);
+
+    const redraw = () => {
+      clearCanvas();
+      draw();
+    };
+
+    const resizeObserver = new ResizeObserver((entries: ResizeObserverEntry[]) => {
+      entries.forEach(entry => {
+        const { inlineSize, blockSize } = entry.borderBoxSize[0];
+        width.value = inlineSize;
+        height.value = blockSize;
+      });
+
+      redraw();
+    });
+
+    onMounted(() => {
+      if (!wrapper.value) return;
+
+      resizeObserver.observe(wrapper.value);
+    });
+
+    const hover = ref(false);
     const intervalId = ref<number>();
 
     watch(hover, value => {
       if (value && props.animateOnHover) {
-        intervalId.value = setInterval(() => {
-          roughCanvas.value.ctx.clearRect(0, 0, roughCanvas.value.canvas.width, roughCanvas.value.canvas.height);
-
-          draw();
-        }, 75);
+        intervalId.value = setInterval(redraw, 75);
       } else {
         clearInterval(intervalId.value);
       }
     });
 
     return {
-      canvas,
+      canvasElement,
       wrapper,
       canvasSize,
       containerSize,
-      hover
+      hover,
+      height,
+      width
     };
   }
 });
@@ -106,6 +143,6 @@ export default defineComponent({
 }
 
 .wrapper {
-  padding: 7rem 14rem;
+  padding: 7rem;
 }
 </style>

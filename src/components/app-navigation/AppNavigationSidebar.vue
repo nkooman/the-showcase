@@ -4,9 +4,9 @@
     MaterialIcon.menu-icon {{ menuIcon }}
   .project-title(:title="currentRouteName") {{ currentRouteName }}
   .project-selector
-    a.backward(role="button" aria-label="Navigate backward" @click="navigateBackward")
+    a.backward(role="button" title="Navigate backward" aria-label="Navigate backward" @click="navigateBackward")
       MaterialIcon.menu-icon chevron_left
-    a.forward(role="button" aria-label="Navigate forward" @click="navigateForward")
+    a.forward(role="button" title="Navigate forward" aria-label="Navigate forward" @click="navigateForward")
       MaterialIcon.menu-icon chevron_right
 </template>
 

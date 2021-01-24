@@ -20,9 +20,8 @@ nav.app-navigation(:class="{ active: isOpen }")
 
 <script lang="ts">
 import { defineComponent, ref, computed, watchEffect } from 'vue';
-import { RouteRecordRaw } from 'vue-router';
 
-import { router } from '@/router';
+import { router, ProjectRoute } from '@/router';
 import MaterialIcon from '@/components/MaterialIcon.vue';
 import AppNavigationSidebar from '@/components/app-navigation/AppNavigationSidebar.vue';
 import AppNavigationRouterLink from '@/components/app-navigation/AppNavigationRouterLink.vue';
@@ -41,20 +40,25 @@ export default defineComponent({
 
     watchEffect(() => context.emit('state-change', isOpen.value));
 
-    const allProjectRoutes = computed(() => router.options.routes.filter(route => route?.meta?.isProject));
+    const routes = computed(() => router.options.routes as ProjectRoute[]);
 
-    const landingRoute = computed(() => router.options.routes.find(route => route?.meta?.isLanding));
+    const allProjectRoutes = computed(() => routes.value.filter(route => route?.meta?.isProject));
 
-    const sortRouteRecordsByCreatedOn = (records: RouteRecordRaw[]) =>
-      records.slice().sort((a, b) => b?.meta?.createdOn - a?.meta?.createdOn);
+    const landingRoute = computed(() => routes.value.find(route => route?.meta?.isLanding));
+
+    const sortRouteRecordsByCreatedOn = (records: ProjectRoute[]) => {
+      if (!records.length) return records;
+
+      return records.slice().sort((a, b) => b.meta.createdOn.getTime() - a.meta.createdOn.getTime());
+    };
 
     type AggregatedProjectRoutes = {
-      [key: number]: RouteRecordRaw[];
+      [key: number]: ProjectRoute[];
     };
 
     const aggregatedProjectRoutes = allProjectRoutes.value.reduce(
-      (accumulator: AggregatedProjectRoutes, route: RouteRecordRaw) => {
-        const year: number = route?.meta?.createdOn.getFullYear();
+      (accumulator: AggregatedProjectRoutes, route: ProjectRoute) => {
+        const year: number = route.meta.createdOn.getFullYear();
 
         return {
           ...accumulator,
@@ -67,7 +71,7 @@ export default defineComponent({
     );
 
     const aggregatedProjectRoutesByCreatedOn = computed(() => {
-      return Object.entries<RouteRecordRaw[]>(aggregatedProjectRoutes)
+      return Object.entries(aggregatedProjectRoutes)
         .map(([key, value]) => [key, sortRouteRecordsByCreatedOn(value)])
         .reverse();
     });
@@ -191,6 +195,7 @@ $app-navigation-width: 7.5rem;
   top: 2rem;
 
   grid-column: label;
+  min-width: 10rem;
 
   color: #ff8c7d;
   font-size: clamp(2.5rem, 3vw, 4rem);

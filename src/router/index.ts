@@ -6,24 +6,26 @@ import LayeredHeadings from '@/views/projects/LayeredHeadings.vue';
 import CityPop from '@/views/projects/CityPop.vue';
 import LostInParadise from '@/views/projects/LostInParadise.vue';
 
-export type Route = RouteRecordRaw & {
+export type ProjectRoute = RouteRecordRaw & {
   path: String;
   name: String;
   component: Component;
-  meta?: {
+  meta: {
     isLanding?: boolean;
-    isProject?: boolean;
-    createdOn?: Date;
+    isProject: boolean;
+    createdOn: Date;
   };
 };
 
-export const routes: Route[] = [
+export const routes: ProjectRoute[] = [
   {
     path: '/',
     name: 'The Showcase',
     component: Landing,
     meta: {
-      isLanding: true
+      isLanding: true,
+      isProject: false,
+      createdOn: new Date('5/26/2020')
     }
   },
   {
