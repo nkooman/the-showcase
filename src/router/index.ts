@@ -20,6 +20,7 @@ export type ProjectRoute = RouteRecordRaw & {
 export const routes: ProjectRoute[] = [
   {
     path: '/',
+    alias: '/the-showcase',
     name: 'The Showcase',
     component: Landing,
     meta: {
