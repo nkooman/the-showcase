@@ -14,10 +14,10 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import MarkeredBackground from '@/components/projects/lost-in-paradise/MarkeredBackground.vue';
-import MarkeredPath from '@/components/projects/lost-in-paradise/MarkeredPath.vue';
-import AnimationToggle from '@/components/projects/lost-in-paradise/AnimationToggle.vue';
-import { shrimp } from '@/assets/projects/lost-in-paradise/shrimp';
+import { shrimp } from '@/projects/lost-in-paradise/assets/shrimp';
+import MarkeredBackground from '@/projects/lost-in-paradise/MarkeredBackground.vue';
+import MarkeredPath from '@/projects/lost-in-paradise/MarkeredPath.vue';
+import AnimationToggle from '@/projects/lost-in-paradise/AnimationToggle.vue';
 
 export default defineComponent({
   name: 'LostInParadise',

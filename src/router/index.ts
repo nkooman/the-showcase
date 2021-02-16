@@ -1,10 +1,10 @@
 import { Component } from 'vue';
 import { createWebHistory, createRouter, RouteRecordRaw } from 'vue-router';
 import Landing from '@/views/Landing.vue';
-import GrayscaleIcons from '@/views/projects/GrayscaleIcons.vue';
-import LayeredHeadings from '@/views/projects/LayeredHeadings.vue';
-import CityPop from '@/views/projects/CityPop.vue';
-import LostInParadise from '@/views/projects/LostInParadise.vue';
+import GrayscaleIcons from '@/projects/grayscale-icons/GrayscaleIcons.vue';
+import LayeredHeadings from '@/projects/layered-headings/LayeredHeadings.vue';
+import CityPop from '@/projects/city-pop/CityPop.vue';
+import LostInParadise from '@/projects/lost-in-paradise/LostInParadise.vue';
 
 export type ProjectRoute = RouteRecordRaw & {
   path: String;

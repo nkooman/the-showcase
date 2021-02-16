@@ -1,15 +1,15 @@
 <template lang="pug">
 .grayscale-icons
   IconList.icon-list
-    IconListItem.icon-list-item(v-for="image in images" v-bind="image" :key="Math.random()")
+    IconListItem.icon-list-item(v-for="icon in icons" v-bind="icon" :key="icon.alt")
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
 
-import IconList from '@/components/projects/grayscale-icons/IconList.vue';
-import IconListItem from '@/components/projects/grayscale-icons/IconListItem.vue';
-import { images as grayscaleIcons } from '@/assets/projects/grayscale-icons';
+import IconList from '@/projects/grayscale-icons/IconList.vue';
+import IconListItem from '@/projects/grayscale-icons/IconListItem.vue';
+import { icons } from '@/projects/grayscale-icons/assets/icons';
 
 export default defineComponent({
   name: 'GrayscaleIcons',
@@ -20,9 +20,9 @@ export default defineComponent({
   },
 
   setup() {
-    const images = ref(grayscaleIcons);
-
-    return { images };
+    return {
+      icons
+    };
   }
 });
 </script>
