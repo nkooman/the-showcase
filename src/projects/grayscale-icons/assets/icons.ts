@@ -6,7 +6,7 @@ import reddit from './reddit.png';
 import facebook from './facebook.png';
 import twitter from './twitter.png';
 
-export const images = [
+export const icons = [
   {
     src: vue,
     alt: 'Vue Logo',

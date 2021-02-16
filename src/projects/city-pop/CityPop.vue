@@ -1,12 +1,12 @@
 <template lang="pug">
 .city-pop
   .content-wrapper
-    img.background(src="~@/assets/projects/city-pop/background.jpg")
+    img.background(src="~@/projects/city-pop/assets/background.jpg")
     .artist
       h1.title Mariya Takeuchi
       h1.title.jp-vertical-text 竹内 まりや
       .image-wrapper
-        img.image(src="~@/assets/projects/city-pop/mariya_takeuchi.jpg")
+        img.image(src="~@/projects/city-pop/assets/mariya_takeuchi.jpg")
         //- This is reversed so that the natural stacking order will order correctly.
         .afterimage.offset-4
         .afterimage.offset-3
