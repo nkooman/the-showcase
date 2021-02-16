@@ -185,7 +185,7 @@ $app-navigation-width: 7.5rem;
 
   list-style-type: none;
 
-  .item {
+  /deep/ .item {
     grid-column: content;
   }
 }
