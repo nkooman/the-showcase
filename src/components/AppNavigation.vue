@@ -23,8 +23,8 @@ import { defineComponent, ref, computed, watchEffect } from 'vue';
 
 import { router, ProjectRoute } from '@/router';
 import MaterialIcon from '@/components/MaterialIcon.vue';
-import AppNavigationSidebar from '@/components/app-navigation/AppNavigationSidebar.vue';
-import AppNavigationRouterLink from '@/components/app-navigation/AppNavigationRouterLink.vue';
+import AppNavigationSidebar from '@/components/AppNavigationSidebar.vue';
+import AppNavigationRouterLink from '@/components/AppNavigationRouterLink.vue';
 
 export default defineComponent({
   name: 'AppNavigation',
