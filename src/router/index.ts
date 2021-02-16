@@ -1,16 +1,31 @@
-import { createWebHistory, createRouter } from 'vue-router';
+import { Component } from 'vue';
+import { createWebHistory, createRouter, RouteRecordRaw } from 'vue-router';
 import Landing from '@/views/Landing.vue';
 import GrayscaleIcons from '@/views/projects/GrayscaleIcons.vue';
 import LayeredHeadings from '@/views/projects/LayeredHeadings.vue';
 import CityPop from '@/views/projects/CityPop.vue';
+import LostInParadise from '@/views/projects/LostInParadise.vue';
 
-const routes = [
+export type ProjectRoute = RouteRecordRaw & {
+  path: String;
+  name: String;
+  component: Component;
+  meta: {
+    isLanding?: boolean;
+    isProject: boolean;
+    createdOn: Date;
+  };
+};
+
+export const routes: ProjectRoute[] = [
   {
     path: '/',
     name: 'The Showcase',
     component: Landing,
     meta: {
-      isLanding: true
+      isLanding: true,
+      isProject: false,
+      createdOn: new Date('5/26/2020')
     }
   },
   {
@@ -38,6 +53,15 @@ const routes = [
     meta: {
       isProject: true,
       createdOn: new Date('11/6/2020')
+    }
+  },
+  {
+    path: '/lost-in-paradise',
+    name: 'Lost in Paradise',
+    component: LostInParadise,
+    meta: {
+      isProject: true,
+      createdOn: new Date('1/15/2021')
     }
   }
 ];

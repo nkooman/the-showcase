@@ -4,9 +4,9 @@
     MaterialIcon.menu-icon {{ menuIcon }}
   .project-title(:title="currentRouteName") {{ currentRouteName }}
   .project-selector
-    a.backward(role="button" aria-label="Navigate backward" @click="navigateBackward")
+    a.backward(role="button" title="Navigate backward" aria-label="Navigate backward" @click="navigateBackward")
       MaterialIcon.menu-icon chevron_left
-    a.forward(role="button" aria-label="Navigate forward" @click="navigateForward")
+    a.forward(role="button" title="Navigate forward" aria-label="Navigate forward" @click="navigateForward")
       MaterialIcon.menu-icon chevron_right
 </template>
 
@@ -44,7 +44,7 @@ export default defineComponent({
     const getPathByIndex = (index: number) => allProjectRoutes.value[index].path;
 
     const navigateBackward = () => {
-      if (!isStartOfRoutes.value) return;
+      if (isStartOfRoutes.value) return;
 
       const path = getPathByIndex(currentRouteIndex.value - 1);
 
@@ -52,7 +52,6 @@ export default defineComponent({
     };
 
     const navigateForward = () => {
-      // Add 1 since index values will start at 0.
       if (isEndOfRoutes.value) return;
 
       const path = getPathByIndex(currentRouteIndex.value + 1);

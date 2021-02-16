@@ -18,6 +18,8 @@
       "**/node_modules/": true,
       "**/obj/": true,
       "**/.expo*/": true
-    }
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
   }
 }

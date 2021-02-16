@@ -4,8 +4,7 @@
   .content-wrapper(:class="{ 'navigation-open': navigationState }")
     router-view(v-slot="{ Component }")
       transition(name="slide" mode="out-in")
-        keep-alive
-          component(:is="Component")
+        component(:is="Component")
 </template>
 
 <script lang="ts">

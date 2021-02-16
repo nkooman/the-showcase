@@ -1,6 +1,5 @@
 <template lang="pug">
 router-link(
-  exact
   custom
   v-slot="{ href, navigate, isActive, isExactActive }"
   :to="props.path")
@@ -27,6 +26,8 @@ export default defineComponent({
       required: true
     }
   },
+
+  emits: ['close-navigation'],
 
   setup(props, context) {
     const closeNavigation = () => context.emit('close-navigation');

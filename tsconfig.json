@@ -3,6 +3,9 @@
     "target": "esnext",
     "module": "esnext",
     "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
     "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",
@@ -13,7 +16,8 @@
     "baseUrl": ".",
     "types": ["webpack-env"],
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@node_modules": ["/node_modules/*"]
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
