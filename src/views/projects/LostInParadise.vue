@@ -1,31 +1,39 @@
 <template lang="pug">
 .lost-in-paradise
-  MarkeredBackground.title(:stroke="'#252226'" :fill="'#46c1d0'" :animateOnHover="true")
+  AnimationToggle(v-model:animationToggle="animationToggle")
+  MarkeredBackground.title(:stroke="'#252226'" :fill="'#46c1d0'" :animate="animationToggle")
     h1 Lost in Paradise
   MarkeredPath(
     :stroke="'#252226'"
     :fill="'#ee5456'"
-    :animateOnHover="true"
+    :animate="animationToggle"
     :path="path"
     :height="250"
     :width="250")
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import MarkeredBackground from '@/components/projects/lost-in-paradise/MarkeredBackground.vue';
 import MarkeredPath from '@/components/projects/lost-in-paradise/MarkeredPath.vue';
+import AnimationToggle from '@/components/projects/lost-in-paradise/AnimationToggle.vue';
 import { shrimp } from '@/assets/projects/lost-in-paradise/shrimp';
 
 export default defineComponent({
   name: 'LostInParadise',
   components: {
     MarkeredBackground,
-    MarkeredPath
+    MarkeredPath,
+    AnimationToggle
   },
 
   setup() {
-    return { path: shrimp };
+    const animationToggle = ref<boolean>();
+
+    return {
+      path: shrimp,
+      animationToggle
+    };
   }
 });
 </script>

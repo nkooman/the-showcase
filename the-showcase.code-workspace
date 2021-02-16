@@ -19,17 +19,7 @@
       "**/obj/": true,
       "**/.expo*/": true
     },
-    "[jsonc]": {
-      "editor.formatOnSave": true
-    },
-    "[json]": {
-      "editor.formatOnSave": true
-    },
-    "[vue]": {
-      "editor.formatOnSave": true
-    },
-    "[javascript]": {
-      "editor.formatOnSave": true
-    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
   }
 }

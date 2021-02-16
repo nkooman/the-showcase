@@ -16,7 +16,7 @@ export default defineComponent({
   props: {
     stroke: String,
     fill: String,
-    animateOnHover: Boolean,
+    animate: Boolean,
     path: {
       type: String,
       required: true
@@ -62,7 +62,6 @@ export default defineComponent({
 
     onUpdated(draw);
 
-    const hover = ref<boolean>();
     const intervalId = ref<number>();
 
     const clearCanvas = () => {
@@ -75,18 +74,18 @@ export default defineComponent({
       draw();
     };
 
-    watch(hover, value => {
-      value && props.animateOnHover ? (intervalId.value = setInterval(redraw, 75)) : clearInterval(intervalId.value);
-    });
+    watch(
+      () => props.animate,
+      value => {
+        value ? (intervalId.value = setInterval(redraw, 75)) : clearInterval(intervalId.value);
+      }
+    );
 
     return {
       canvasElement,
-      hover,
       height: props.height,
       width: props.width
     };
   }
 });
 </script>
-
-<style lang="scss" scoped></style>

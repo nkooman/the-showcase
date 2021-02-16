@@ -1,5 +1,5 @@
 <template lang="pug">
-.markered-background(:style="containerSize" @mouseover="hover = true" @mouseleave="hover = false")
+.markered-background(:style="containerSize")
   canvas.canvas(ref="canvasElement" v-bind="canvasSize")
   .wrapper(ref="wrapper")
     slot
@@ -19,7 +19,7 @@ export default defineComponent({
   props: {
     stroke: String,
     fill: String,
-    animateOnHover: Boolean
+    animate: Boolean
   },
 
   setup(props) {
@@ -104,23 +104,20 @@ export default defineComponent({
       resizeObserver.observe(wrapper.value);
     });
 
-    const hover = ref(false);
     const intervalId = ref<number>();
 
-    watch(hover, value => {
-      if (value && props.animateOnHover) {
-        intervalId.value = setInterval(redraw, 75);
-      } else {
-        clearInterval(intervalId.value);
+    watch(
+      () => props.animate,
+      value => {
+        value ? (intervalId.value = setInterval(redraw, 75)) : clearInterval(intervalId.value);
       }
-    });
+    );
 
     return {
       canvasElement,
       wrapper,
       canvasSize,
       containerSize,
-      hover,
       height,
       width
     };
