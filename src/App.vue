@@ -1,31 +1,34 @@
 <template lang="pug">
-  #app
-    AppNavgiation(@state-change="navigationStateChange")
-    .content-wrapper(:class="{ 'navigation-open': navigationState }")
+#app
+  AppNavgiation(@state-change="navigationStateChange")
+  .content-wrapper(:class="{ 'navigation-open': navigationState }")
+    router-view(v-slot="{ Component }")
       transition(name="slide" mode="out-in")
-        router-view
+        component(:is="Component")
 </template>
 
-<script>
-import AppNavgiation from '@/components/AppNavigation';
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
 
-export default {
+import AppNavgiation from '@/components/app-navigation/AppNavigation.vue';
+
+export default defineComponent({
   name: 'App',
 
   components: {
     AppNavgiation
   },
 
-  data: () => ({
-    navigationState: false
-  }),
+  setup() {
+    const navigationState = ref(false);
 
-  methods: {
-    navigationStateChange(value) {
-      this.navigationState = value;
-    }
+    const navigationStateChange = (value: boolean) => {
+      navigationState.value = value;
+    };
+
+    return { navigationState, navigationStateChange };
   }
-};
+});
 </script>
 
 <style lang="scss">
@@ -59,17 +62,17 @@ $app-navigation-width: 7.5rem;
 
 .slide-enter-active,
 .slide-leave-active {
-  transition: all 0.3s;
+  transition: all 0.25s;
 }
 
 .slide-enter,
 .slide-leave-to {
   @media (map-get($viewport, 'min-width-7')) {
-    transform: translateX(100%);
+    transform: translateX(-100%);
   }
 
   @media (map-get($viewport, 'max-width-7')) {
-    transform: translateY(100%);
+    transform: translateY(-100%);
   }
 }
 </style>

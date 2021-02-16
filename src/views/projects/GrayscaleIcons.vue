@@ -4,12 +4,14 @@
     IconListItem.icon-list-item(v-for="image in images" v-bind="image" :key="Math.random()")
 </template>
 
-<script>
-import IconList from '@/components/projects/grayscale-icons/IconList';
-import IconListItem from '@/components/projects/grayscale-icons/IconListItem';
-import { images } from '@/assets/projects/grayscale-icons';
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
 
-export default {
+import IconList from '@/components/projects/grayscale-icons/IconList.vue';
+import IconListItem from '@/components/projects/grayscale-icons/IconListItem.vue';
+import { images as grayscaleIcons } from '@/assets/projects/grayscale-icons';
+
+export default defineComponent({
   name: 'GrayscaleIcons',
 
   components: {
@@ -17,8 +19,12 @@ export default {
     IconListItem
   },
 
-  data: () => ({ images })
-};
+  setup() {
+    const images = ref(grayscaleIcons);
+
+    return { images };
+  }
+});
 </script>
 
 <style lang="scss" scoped>

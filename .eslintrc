@@ -2,14 +2,14 @@
   "root": true,
   "parser": "vue-eslint-parser",
   "parserOptions": {
-    "parser": "babel-eslint",
+    "parser": "@typescript-eslint/parser",
     "sourceType": "module"
   },
   "env": {
     "browser": true,
     "node": true
   },
-  "extends": ["plugin:vue/essential", "@vue/airbnb", "@vue/prettier"],
+  "extends": ["plugin:vue/essential", "@vue/airbnb", "@vue/prettier", "@vue/typescript"],
   "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": ["error"],
@@ -25,7 +25,11 @@
     "no-console": "warn",
     "no-debugger": "warn",
     "import/prefer-default-export": "off",
-    "import/no-extraneous-dependencies": "off"
+    "import/no-extraneous-dependencies": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "no-unused-expressions": "off",
+    "@typescript-eslint/no-unused-expressions": "off"
   },
   "settings": {
     "import/resolver": {

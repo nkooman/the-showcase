@@ -11,11 +11,14 @@ module.exports = {
     }
   },
   chainWebpack: config => {
-    config.plugin('html').tap(args => {
-      const newArgs = [{ ...args[0], title: 'The Showcase' }];
+    config
+      .plugin('html')
+      .tap(args => {
+        const newArgs = [{ ...args[0], title: 'The Showcase' }];
 
-      return newArgs;
-    });
+        return newArgs;
+      })
+      .end();
   },
   css: {
     loaderOptions: {

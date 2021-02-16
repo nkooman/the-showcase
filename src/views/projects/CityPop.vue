@@ -14,12 +14,16 @@
         .afterimage.offset-1
 </template>
 
-<script>
-export default {};
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  name: 'CityPop'
+});
 </script>
 
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap');
+@include google-font('Noto Sans JP', 900);
 
 $blue: #9bbfd1;
 $magenta: #cd9bd1;
@@ -27,7 +31,7 @@ $yellow: #fff766;
 $purple: #a49bd1;
 $green: #9bd1a9;
 
-$padding: clamp(2rem, 6vw, 10rem);
+$padding: clamp(2rem, 6vmax, 10rem);
 
 .city-pop {
   width: 100%;
@@ -79,7 +83,7 @@ $padding: clamp(2rem, 6vw, 10rem);
 
   color: $yellow;
   font-weight: 900;
-  font-size: clamp(4rem, 5vw, 8rem);
+  font-size: clamp(4rem, 5vmax, 8rem);
   line-height: 1;
 }
 
@@ -94,7 +98,7 @@ $padding: clamp(2rem, 6vw, 10rem);
 $top: calc(100% - clamp(10rem, 30%, 20rem));
 $right: calc(-0.5 * #{$padding});
 $offset: calc(-0.5 * #{$padding});
-$image-size: clamp(15rem, 25vw, 40rem);
+$image-size: clamp(15rem, 25vmax, 40rem);
 
 $colors: (
   1: $green,
