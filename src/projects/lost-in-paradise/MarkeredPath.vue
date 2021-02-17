@@ -62,8 +62,6 @@ export default defineComponent({
 
     onUpdated(draw);
 
-    const intervalId = ref<number>();
-
     const clearCanvas = () => {
       const context = canvasElement.value?.getContext('2d');
       context?.clearRect(0, 0, context.canvas.width, context.canvas.height);
@@ -73,6 +71,8 @@ export default defineComponent({
       clearCanvas();
       draw();
     };
+
+    const intervalId = ref();
 
     watch(
       () => props.animate,

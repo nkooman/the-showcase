@@ -20,8 +20,9 @@ nav.app-navigation(:class="{ active: isOpen }")
 
 <script lang="ts">
 import { defineComponent, ref, computed, watchEffect } from 'vue';
+import { useRouter } from 'vue-router';
 
-import { router, ProjectRoute } from '@/router';
+import { ProjectRoute } from '@/router';
 import MaterialIcon from '@/components/MaterialIcon.vue';
 import AppNavigationSidebar from '@/components/AppNavigationSidebar.vue';
 import AppNavigationRouterLink from '@/components/AppNavigationRouterLink.vue';
@@ -36,6 +37,7 @@ export default defineComponent({
   },
 
   setup(_, context) {
+    const router = useRouter();
     const isOpen = ref(false);
 
     watchEffect(() => context.emit('state-change', isOpen.value));
@@ -185,7 +187,7 @@ $app-navigation-width: 7.5rem;
 
   list-style-type: none;
 
-  /deep/ .item {
+  :deep(.item) {
     grid-column: content;
   }
 }

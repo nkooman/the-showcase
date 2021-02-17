@@ -1,5 +1,5 @@
 import { Component } from 'vue';
-import { createWebHistory, createRouter, RouteRecordRaw } from 'vue-router';
+import { createWebHashHistory, createRouter, RouteRecordRaw } from 'vue-router';
 import Landing from '@/views/Landing.vue';
 import GrayscaleIcons from '@/projects/grayscale-icons/GrayscaleIcons.vue';
 import LayeredHeadings from '@/projects/layered-headings/LayeredHeadings.vue';
@@ -68,6 +68,6 @@ export const routes: ProjectRoute[] = [
 ];
 
 export const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes
 });

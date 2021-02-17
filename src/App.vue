@@ -5,18 +5,22 @@
     router-view(v-slot="{ Component }")
       transition(name="slide" mode="out-in")
         component(:is="Component")
+  AppFooter
+    router-view(name="markdown")
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 
 import AppNavgiation from '@/components/AppNavigation.vue';
+import AppFooter from '@/components/AppFooter.vue';
 
 export default defineComponent({
   name: 'App',
 
   components: {
-    AppNavgiation
+    AppNavgiation,
+    AppFooter
   },
 
   setup() {
