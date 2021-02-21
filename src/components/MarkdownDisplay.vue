@@ -1,6 +1,5 @@
 <template lang="pug">
-.markdown-display
-  pre(v-html="interpretedMarkdown")
+.markdown-display(v-html="html")
 </template>
 
 <script lang="ts">
@@ -13,15 +12,16 @@ export default defineComponent({
   props: {
     markdown: {
       type: String,
-      required: true
+      required: true,
+      default: ''
     }
   },
   setup({ markdown }) {
-    const interpretedMarkdown = computed(() => {
-      return marked(sanitizeHtml(markdown));
-    });
+    const html = computed(() => sanitizeHtml(marked(markdown)));
 
-    return interpretedMarkdown;
+    return {
+      html
+    };
   }
 });
 </script>
@@ -32,5 +32,7 @@ export default defineComponent({
 
 .markdown-display {
   font-family: 'Lora', serif;
+
+  background: white;
 }
 </style>

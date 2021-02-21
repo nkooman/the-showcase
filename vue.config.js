@@ -1,8 +1,7 @@
 const path = require('path');
-const RemarkHTML = require('remark-html');
 
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '/the-showcase/' : '/',
+  publicPath: '/the-showcase/',
   configureWebpack: {
     resolve: {
       alias: {
@@ -19,17 +18,8 @@ module.exports = {
     config.module
       .rule('markdown')
       .test(/\.md$/)
-      .use('html-loader')
-      .loader('html-loader')
-      .end()
-      .use('remark-loader')
-      .loader('remark-loader')
-      .tap(options => ({
-        ...options,
-        remarkOptions: {
-          plugins: [RemarkHTML]
-        }
-      }))
+      .use('raw-loader')
+      .loader('raw-loader')
       .end();
   },
   css: {

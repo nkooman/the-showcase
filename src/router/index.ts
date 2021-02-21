@@ -1,32 +1,33 @@
-import { Component } from 'vue';
 import { createWebHashHistory, createRouter, RouteRecordRaw } from 'vue-router';
 import Landing from '@/views/Landing.vue';
 import GrayscaleIcons from '@/projects/grayscale-icons/GrayscaleIcons.vue';
+import GrayscaleIconsMarkdown from '@/projects/grayscale-icons/grayscale-icons.md';
 import LayeredHeadings from '@/projects/layered-headings/LayeredHeadings.vue';
+import LayeredHeadingsMarkdown from '@/projects/layered-headings/layered-headings.md';
 import CityPop from '@/projects/city-pop/CityPop.vue';
+import CityPopMarkdown from '@/projects/city-pop/city-pop.md';
 import LostInParadise from '@/projects/lost-in-paradise/LostInParadise.vue';
+import LostInParadiseMarkdown from '@/projects/lost-in-paradise/lost-in-paradise.md';
 
-export type ProjectRoute = RouteRecordRaw & {
-  path: String;
-  name: String;
-  component: Component;
-  meta: {
+declare module 'vue-router' {
+  interface RouteMeta {
     isLanding?: boolean;
     isProject: boolean;
     createdOn: Date;
-  };
-};
+    markdown: string;
+  }
+}
 
-export const routes: ProjectRoute[] = [
+export const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    alias: '/the-showcase',
     name: 'The Showcase',
     component: Landing,
     meta: {
       isLanding: true,
       isProject: false,
-      createdOn: new Date('5/26/2020')
+      createdOn: new Date('5/26/2020'),
+      markdown: ''
     }
   },
   {
@@ -35,7 +36,8 @@ export const routes: ProjectRoute[] = [
     component: GrayscaleIcons,
     meta: {
       isProject: true,
-      createdOn: new Date('10/22/2020')
+      createdOn: new Date('10/22/2020'),
+      markdown: GrayscaleIconsMarkdown
     }
   },
   {
@@ -44,7 +46,8 @@ export const routes: ProjectRoute[] = [
     component: LayeredHeadings,
     meta: {
       isProject: true,
-      createdOn: new Date('10/27/2020')
+      createdOn: new Date('10/27/2020'),
+      markdown: LayeredHeadingsMarkdown
     }
   },
   {
@@ -53,7 +56,8 @@ export const routes: ProjectRoute[] = [
     component: CityPop,
     meta: {
       isProject: true,
-      createdOn: new Date('11/6/2020')
+      createdOn: new Date('11/6/2020'),
+      markdown: CityPopMarkdown
     }
   },
   {
@@ -62,12 +66,13 @@ export const routes: ProjectRoute[] = [
     component: LostInParadise,
     meta: {
       isProject: true,
-      createdOn: new Date('1/15/2021')
+      createdOn: new Date('1/15/2021'),
+      markdown: LostInParadiseMarkdown
     }
   }
 ];
 
 export const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHashHistory('/the-showcase/'),
   routes
 });

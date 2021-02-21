@@ -12,12 +12,14 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
+import { useRouter } from 'vue-router';
 
-import { router } from '@/router';
 import MaterialIcon from '@/components/MaterialIcon.vue';
 
 export default defineComponent({
   name: 'AppNavigationSidebar',
+
+  emits: ['toggleNavigation'],
 
   components: {
     MaterialIcon
@@ -31,6 +33,7 @@ export default defineComponent({
   },
 
   setup(props, context) {
+    const router = useRouter();
     const currentRouteName = computed(() => router.currentRoute.value.name);
 
     const allProjectRoutes = computed(() => router.options.routes.filter(route => route?.meta?.isProject));
@@ -66,7 +69,7 @@ export default defineComponent({
 
     const menuIcon = computed((): MenuIcons => (props.isOpen ? MenuIcons.Close : MenuIcons.Menu));
 
-    const toggleNavigation = () => context.emit('toggle-navigation');
+    const toggleNavigation = () => context.emit('toggleNavigation');
 
     return {
       currentRouteName,
