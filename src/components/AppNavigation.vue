@@ -1,5 +1,5 @@
 <template lang="pug">
-nav.app-navigation(:class="{ active: isOpen }")
+nav.app-navigation(v-body-scroll-lock="isOpen" :class="{ active: isOpen }")
   AppNavigationSidebar(:isOpen="isOpen" @toggle-navigation="toggleNavigation")
   .project-container
     ul.project-list(v-if="isOpen")
@@ -19,9 +19,8 @@ nav.app-navigation(:class="{ active: isOpen }")
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, watchEffect } from 'vue';
-
-import { router, ProjectRoute } from '@/router';
+import { defineComponent, ref, computed } from 'vue';
+import { useRouter, RouteRecordRaw } from 'vue-router';
 import MaterialIcon from '@/components/MaterialIcon.vue';
 import AppNavigationSidebar from '@/components/AppNavigationSidebar.vue';
 import AppNavigationRouterLink from '@/components/AppNavigationRouterLink.vue';
@@ -35,29 +34,39 @@ export default defineComponent({
     AppNavigationRouterLink
   },
 
-  setup(_, context) {
+  setup() {
     const isOpen = ref(false);
 
-    watchEffect(() => context.emit('state-change', isOpen.value));
+    const closeNavigation = () => {
+      isOpen.value = false;
+    };
 
-    const routes = computed(() => router.options.routes as ProjectRoute[]);
+    const toggleNavigation = () => {
+      isOpen.value = !isOpen.value;
+    };
 
+    const router = useRouter();
+    const routes = computed(() => router.options.routes as RouteRecordRaw[]);
     const allProjectRoutes = computed(() => routes.value.filter(route => route?.meta?.isProject));
-
     const landingRoute = computed(() => routes.value.find(route => route?.meta?.isLanding));
 
-    const sortRouteRecordsByCreatedOn = (records: ProjectRoute[]) => {
+    const sortRouteRecordsByCreatedOn = (records: RouteRecordRaw[]) => {
       if (!records.length) return records;
 
-      return records.slice().sort((a, b) => b.meta.createdOn.getTime() - a.meta.createdOn.getTime());
+      return records.slice().sort((a, b) => {
+        if (!b.meta || !a.meta) return 0;
+
+        return b.meta.createdOn.getTime() - a.meta.createdOn.getTime();
+      });
     };
 
     type AggregatedProjectRoutes = {
-      [key: number]: ProjectRoute[];
+      [key: number]: RouteRecordRaw[];
     };
 
     const aggregatedProjectRoutes = allProjectRoutes.value.reduce(
-      (accumulator: AggregatedProjectRoutes, route: ProjectRoute) => {
+      (accumulator: AggregatedProjectRoutes, route: RouteRecordRaw) => {
+        if (!route.meta) return accumulator;
         const year: number = route.meta.createdOn.getFullYear();
 
         return {
@@ -76,25 +85,12 @@ export default defineComponent({
         .reverse();
     });
 
-    const closeNavigation = () => {
-      isOpen.value = false;
-    };
-
-    const openNavigation = () => {
-      isOpen.value = true;
-    };
-
-    const toggleNavigation = () => {
-      isOpen.value = !isOpen.value;
-    };
-
     return {
       isOpen,
       allProjectRoutes,
       landingRoute,
       aggregatedProjectRoutesByCreatedOn,
       closeNavigation,
-      openNavigation,
       toggleNavigation
     };
   }
@@ -185,7 +181,7 @@ $app-navigation-width: 7.5rem;
 
   list-style-type: none;
 
-  /deep/ .item {
+  :deep(.item) {
     grid-column: content;
   }
 }

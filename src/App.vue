@@ -1,32 +1,25 @@
 <template lang="pug">
 #app
-  AppNavgiation(@state-change="navigationStateChange")
-  .content-wrapper(:class="{ 'navigation-open': navigationState }")
+  AppNavgiation
+  .content-wrapper
     router-view(v-slot="{ Component }")
       transition(name="slide" mode="out-in")
         component(:is="Component")
+    AppFooter
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
 
 import AppNavgiation from '@/components/AppNavigation.vue';
+import AppFooter from '@/components/AppFooter.vue';
 
 export default defineComponent({
   name: 'App',
 
   components: {
-    AppNavgiation
-  },
-
-  setup() {
-    const navigationState = ref(false);
-
-    const navigationStateChange = (value: boolean) => {
-      navigationState.value = value;
-    };
-
-    return { navigationState, navigationStateChange };
+    AppNavgiation,
+    AppFooter
   }
 });
 </script>
@@ -54,10 +47,6 @@ $app-navigation-width: 7.5rem;
   @media (map-get($viewport, 'max-width-7')) {
     padding-top: $app-navigation-width;
   }
-}
-
-.navigation-open {
-  overflow: hidden;
 }
 
 .slide-enter-active,

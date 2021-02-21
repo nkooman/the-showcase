@@ -20,6 +20,12 @@
       {
         "empty-line-between-groups": true
       }
+    ],
+    "selector-pseudo-element-no-unknown": [
+      true,
+      {
+        "ignorePseudoElements": ["deep"]
+      }
     ]
   }
 }

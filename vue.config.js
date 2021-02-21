@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '/the-showcase/' : '/',
+  publicPath: '/the-showcase/',
   configureWebpack: {
     resolve: {
       alias: {
@@ -13,11 +13,13 @@ module.exports = {
   chainWebpack: config => {
     config
       .plugin('html')
-      .tap(args => {
-        const newArgs = [{ ...args[0], title: 'The Showcase' }];
-
-        return newArgs;
-      })
+      .tap(args => [{ ...args[0], title: 'The Showcase' }])
+      .end();
+    config.module
+      .rule('markdown')
+      .test(/\.md$/)
+      .use('raw-loader')
+      .loader('raw-loader')
       .end();
   },
   css: {

@@ -104,7 +104,7 @@ export default defineComponent({
       resizeObserver.observe(wrapper.value);
     });
 
-    const intervalId = ref<number>();
+    const intervalId = ref();
 
     watch(
       () => props.animate,
