@@ -1,5 +1,6 @@
 import { createWebHashHistory, createRouter, RouteRecordRaw } from 'vue-router';
 import Landing from '@/views/Landing.vue';
+import Ideas from '@/ideas.md';
 import GrayscaleIcons from '@/projects/grayscale-icons/GrayscaleIcons.vue';
 import GrayscaleIconsMarkdown from '@/projects/grayscale-icons/grayscale-icons.md';
 import LayeredHeadings from '@/projects/layered-headings/LayeredHeadings.vue';
@@ -27,7 +28,7 @@ export const routes: RouteRecordRaw[] = [
       isLanding: true,
       isProject: false,
       createdOn: new Date('5/26/2020'),
-      markdown: ''
+      markdown: Ideas
     }
   },
   {
