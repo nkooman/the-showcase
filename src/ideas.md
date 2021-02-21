@@ -1,6 +1,9 @@
 # Ideas
 
-- [ ] Lost in Paradise
+- [x] Grayscale Icons
+- [x] Layered Headings
+- [x] City Pop
+- [x] Lost in Paradise
 - [ ] Neumorphism
 - [ ] Gridlock
 - [ ] Mouse-based parallax
