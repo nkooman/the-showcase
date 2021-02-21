@@ -1,5 +1,5 @@
 <template lang="pug">
-article.markdown-display(v-add-target="'_blank'" v-html="html" :key="html")
+article.markdown-display(v-add-target="'_blank'" v-html="html")
 </template>
 
 <script lang="ts">
