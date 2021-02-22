@@ -59,23 +59,31 @@ export default defineComponent({
     #ideas + ul {
       list-style-type: none;
 
-      input:checked::before {
-        position: absolute;
+      input:checked {
+        appearance: none;
+        width: 13px;
+        height: 13px;
+        position: relative;
 
-        display: grid;
+        &::before {
+          margin: 3px 0;
+          position: absolute;
 
-        width: inherit;
-        height: inherit;
+          display: grid;
 
-        color: #fff;
+          width: inherit;
+          height: inherit;
 
-        font-size: 8px;
+          color: #fff;
 
-        background-color: #1b2127;
-        border-radius: 2px;
+          font-size: 8px;
 
-        content: '✔';
-        place-items: center;
+          background-color: #1b2127;
+          border-radius: 2px;
+
+          content: '✔';
+          place-items: center;
+        }
       }
     }
   }

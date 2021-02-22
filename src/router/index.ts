@@ -73,7 +73,12 @@ export const routes: RouteRecordRaw[] = [
   }
 ];
 
+const scrollBehavior = () => {
+  return { top: 0 };
+};
+
 export const router = createRouter({
   history: createWebHashHistory('/the-showcase/'),
+  scrollBehavior,
   routes
 });
