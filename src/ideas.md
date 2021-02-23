@@ -4,7 +4,7 @@
 - [x] Layered Headings
 - [x] City Pop
 - [x] Lost in Paradise
-- [ ] Neumorphism
+- [x] Neumorphism
 - [ ] Gridlock
 - [ ] Mouse-based parallax
 - [ ] Modernism
