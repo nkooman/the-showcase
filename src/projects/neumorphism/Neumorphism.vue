@@ -8,8 +8,8 @@
       Button(iconActiveColor="#bcb5ff") add
     .input-group
       Input(placeholder="Username...")
-      Input(placeholder="Password...")
-      Input(placeholder="Email...")
+      Input(type="password" placeholder="Password...")
+      Input(type="email" placeholder="Email...")
     Gauge
     ProgressBar
 </template>

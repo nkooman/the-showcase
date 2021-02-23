@@ -1,5 +1,5 @@
 <template lang="pug">
-input.input(:placeholder="placeholder")
+input.input(:type="type" :placeholder="placeholder")
 </template>
 
 <script lang="ts">
@@ -11,6 +11,11 @@ export default defineComponent({
     placeholder: {
       type: String,
       required: false
+    },
+    type: {
+      type: String,
+      required: false,
+      default: 'text'
     }
   }
 });
