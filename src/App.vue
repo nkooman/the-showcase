@@ -1,11 +1,10 @@
 <template lang="pug">
-#app
-  AppNavgiation
-  .content-wrapper
-    router-view(v-slot="{ Component }")
-      transition(name="slide" mode="out-in")
-        component(:is="Component")
-    AppFooter
+AppNavgiation
+.content-wrapper
+  router-view(v-slot="{ Component }")
+    transition(name="slide" mode="out-in")
+      component(:is="Component")
+  AppFooter
 </template>
 
 <script lang="ts">

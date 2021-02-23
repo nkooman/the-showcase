@@ -13,4 +13,8 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @include google-font('Material Icons');
+
+.material-icons {
+  font-size: inherit;
+}
 </style>

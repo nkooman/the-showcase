@@ -10,7 +10,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import { images } from '@/projects/layered-headings/assets/images';
+import { images } from './assets/images';
 
 export default defineComponent({
   name: 'LayeredHeadings',

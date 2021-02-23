@@ -174,7 +174,7 @@ $app-navigation-width: 7.5rem;
 
 .year-category {
   display: grid;
-  grid-template-columns: [label] min-content [content] 1fr;
+  grid-template-columns: [label] clamp(5rem, 15vw, 10rem) [content] 1fr;
   align-items: center;
   margin: 0;
   padding: 1rem 0;
@@ -191,7 +191,6 @@ $app-navigation-width: 7.5rem;
   top: 2rem;
 
   grid-column: label;
-  min-width: 10rem;
 
   color: #ff8c7d;
   font-size: clamp(2.5rem, 3vw, 4rem);
