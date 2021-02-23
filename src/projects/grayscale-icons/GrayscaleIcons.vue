@@ -7,9 +7,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import IconList from '@/projects/grayscale-icons/IconList.vue';
-import IconListItem from '@/projects/grayscale-icons/IconListItem.vue';
-import { icons } from '@/projects/grayscale-icons/assets/icons';
+import IconList from './IconList.vue';
+import IconListItem from './IconListItem.vue';
+import { icons } from './assets/icons';
 
 export default defineComponent({
   name: 'GrayscaleIcons',

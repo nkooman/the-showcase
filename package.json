@@ -9,13 +9,17 @@
   },
   "dependencies": {
     "@types/resize-observer-browser": "^0.1.5",
+    "animejs": "^3.2.1",
     "core-js": "^3.6.4",
+    "gradient-path": "^2.1.0",
     "marked": "^2.0.0",
+    "tinygradient": "^1.1.3",
     "vue": "^3.0.2",
     "vue-router": "^4.0.3"
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.12.7",
+    "@types/animejs": "^3.1.2",
     "@types/body-scroll-lock": "^2.6.1",
     "@types/dompurify": "^2.2.1",
     "@types/marked": "^1.2.2",
