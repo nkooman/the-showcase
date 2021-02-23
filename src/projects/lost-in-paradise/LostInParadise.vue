@@ -54,6 +54,7 @@ $white: #f9f9f9;
   width: 100%;
   min-height: 100%;
   height: min-content;
+  padding: 10rem 0;
 
   font-family: 'Caveat', sans-serif;
 
