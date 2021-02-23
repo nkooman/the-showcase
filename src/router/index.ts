@@ -11,6 +11,8 @@ import LostInParadise from '@/projects/lost-in-paradise/LostInParadise.vue';
 import LostInParadiseMarkdown from '@/projects/lost-in-paradise/lost-in-paradise.md';
 import Neumorphism from '@/projects/neumorphism/Neumorphism.vue';
 import NeumorphismMarkdown from '@/projects/neumorphism/neumorphism.md';
+import ClickerGame from '@/projects/clicker-game/ClickerGame.vue';
+import ClickerGameMarkdown from '@/projects/clicker-game/clicker-game.md';
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -81,6 +83,16 @@ export const routes: RouteRecordRaw[] = [
       isProject: true,
       createdOn: new Date('2/21/2021'),
       markdown: NeumorphismMarkdown
+    }
+  },
+  {
+    path: '/clicker-game',
+    name: 'Clicker Game',
+    component: ClickerGame,
+    meta: {
+      isProject: true,
+      createdOn: new Date('2/23/2021'),
+      markdown: ClickerGameMarkdown
     }
   }
 ];
