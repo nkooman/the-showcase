@@ -4,8 +4,8 @@
     .button-group
       Button(iconActiveColor="#ff8a7d") favorite
       Button(iconActiveColor="#b5ffc1") share
-      Button(iconActiveColor="#9ec2ff") settings
-      Button(iconActiveColor="#bcb5ff") add
+      Button(iconActiveColor="#82b0ff") settings
+      Button(iconActiveColor="#796bff") palette
     .input-group
       Input(placeholder="Username...")
       Input(type="password" placeholder="Password...")
