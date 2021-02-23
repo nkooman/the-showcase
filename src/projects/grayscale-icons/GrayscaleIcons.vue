@@ -30,7 +30,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .grayscale-icons {
   width: 100%;
-  height: 100%;
+  height: min-content;
 
   background: #252525;
 }
@@ -42,14 +42,15 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100%;
+  height: min-content;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 10rem 0;
 
   list-style-type: none;
 
   @media (map-get($viewport, 'min-width-7')) {
     flex-flow: row nowrap;
+    height: 100vh;
   }
 }
 

@@ -37,7 +37,8 @@ export default defineComponent({
 
 .neumorphism {
   background: #1d1d1d;
-  height: 100%;
+  min-height: 100%;
+  height: min-content;
   padding: 2rem;
   font-family: 'Rubik', sans-serif;
 }
