@@ -11,6 +11,8 @@ import LostInParadise from '@/projects/lost-in-paradise/LostInParadise.vue';
 import LostInParadiseMarkdown from '@/projects/lost-in-paradise/lost-in-paradise.md';
 import Neumorphism from '@/projects/neumorphism/Neumorphism.vue';
 import NeumorphismMarkdown from '@/projects/neumorphism/neumorphism.md';
+import ComplexFormControls from '@/projects/complex-form-controls/ComplexFormControls.vue';
+import ComplexFormControlsMarkdown from '@/projects/complex-form-controls/complex-form-controls.md';
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -81,6 +83,16 @@ export const routes: RouteRecordRaw[] = [
       isProject: true,
       createdOn: new Date('2/21/2021'),
       markdown: NeumorphismMarkdown
+    }
+  },
+  {
+    path: '/complex-form-controls',
+    name: 'Complex Form Controls',
+    component: ComplexFormControls,
+    meta: {
+      isProject: true,
+      createdOn: new Date('3/13/2021'),
+      markdown: ComplexFormControlsMarkdown
     }
   }
 ];

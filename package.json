@@ -10,11 +10,15 @@
   "dependencies": {
     "@types/resize-observer-browser": "^0.1.5",
     "animejs": "^3.2.1",
+    "body-scroll-lock": "^3.1.5",
     "core-js": "^3.6.4",
+    "dompurify": "^2.2.6",
     "gradient-path": "^2.1.0",
     "marked": "^2.0.0",
+    "roughjs": "^4.3.1",
     "tinygradient": "^1.1.3",
     "vue": "^3.0.2",
+    "vue-composable": "^1.0.0-beta.20",
     "vue-router": "^4.0.3"
   },
   "devDependencies": {
@@ -36,8 +40,6 @@
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^5.0.2",
     "babel-eslint": "^10.1.0",
-    "body-scroll-lock": "^3.1.5",
-    "dompurify": "^2.2.6",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^6.2.2",
@@ -46,7 +48,6 @@
     "pug": "^2.0.4",
     "pug-plain-loader": "^1.0.0",
     "raw-loader": "^4.0.2",
-    "roughjs": "^4.3.1",
     "sass-loader": "^8.0.2",
     "stylelint": "^13.3.0",
     "stylelint-config-rational-order": "^0.1.2",
