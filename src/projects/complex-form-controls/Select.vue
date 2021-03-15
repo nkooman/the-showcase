@@ -1,21 +1,20 @@
 <template lang="pug">
-.select(ref="selectRef" @click="show = true")
-  span.select-label {{ label }}
-  .select-value
-    input()
-    span {{ placeholder }}
-    span {{ }}
+.select(ref="selectRef")
+  span.label(@click="open") {{ label }}
+  .select-value(@click="open")
+    input.filter-input(v-model="filterInput" v-if="isOpen" ref="filterInputRef" @keyup.esc="close")
+    span.placeholder(v-if="!hasSelected && !isOpen") {{ placeholder }}
+    span.selected-value(v-if="hasSelected && !isOpen") {{ selected?.label }}
   .select-options(v-show="show")
     .select-option(
-      v-for="option in options"
+      v-for="option in filteredOptions"
       @click="selectAndClose(option)"
       :key="`${option.label}_${Math.random()}`")
       span {{ option.label }}
-
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref, watchEffect } from 'vue';
+import { computed, defineComponent, nextTick, PropType, ref, watch } from 'vue';
 import { useOnOutsidePress } from 'vue-composable';
 
 export type Option = Object & {
@@ -25,7 +24,7 @@ export type Option = Object & {
 
 export default defineComponent({
   name: 'Select',
-  emits: ['value:update'],
+  emits: ['update:value'],
   props: {
     label: {
       type: String,
@@ -39,34 +38,112 @@ export default defineComponent({
     placeholder: {
       type: String,
       required: false,
-      default: ''
+      default: 'Select an option...'
     }
   },
-  setup(_, { emit }) {
-    const selectRef = ref<Element>();
+  setup(props, { emit }) {
+    const selectRef = ref<HTMLDivElement>();
+    const filterInputRef = ref<HTMLInputElement>();
     const show = ref(false);
-    const value = ref<Option>();
 
-    useOnOutsidePress(selectRef, () => {
-      show.value = false;
-    });
+    // Display
+    const isOpen = computed(() => show.value);
 
-    const selectAndClose = (option: Option) => {
-      value.value = option;
+    const open = () => {
+      show.value = true;
+      nextTick(() => filterInputRef.value?.focus());
+    };
+
+    const close = () => {
+      nextTick(() => filterInputRef.value?.blur());
       show.value = false;
     };
 
-    watchEffect(() => {
-      emit('value:update', value);
-    });
+    useOnOutsidePress(selectRef, close);
+
+    // Filtering
+    const filterInput = ref('');
+    const optionIncludesValue = (option: Option) =>
+      option.label.includes(filterInput.value) || option.value.includes(filterInput.value);
+    const filteredOptions = computed(() => props.options.filter(optionIncludesValue));
+
+    // Selection
+    const selected = ref<Option>();
+    const hasSelected = computed(() => selected.value !== null);
+    const selectAndClose = (option: Option) => {
+      selected.value = option;
+      close();
+    };
+
+    watch(selected, () => emit('update:value', selected.value));
 
     return {
       selectRef,
+      filterInputRef,
       show,
-      selectAndClose
+      open,
+      selectAndClose,
+      selected,
+      hasSelected,
+      isOpen,
+      filterInput,
+      filteredOptions
     };
   }
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.select-value {
+  margin: 0.5rem;
+  padding: 7px;
+
+  font-size: 14px;
+
+  background: #bababa;
+  border-radius: 5px;
+}
+
+.label {
+  margin-left: 0.5rem;
+
+  font-size: 14px;
+}
+
+.filter-input,
+.placeholder,
+.selected-value {
+  height: 28px;
+  padding: 7px;
+
+  color: #444;
+
+  background: transparent;
+  border: none;
+}
+
+.select-options {
+  margin: 0.5rem;
+
+  font-size: 14px;
+}
+
+.select-option {
+  width: 100%;
+  padding: 7px 14px;
+
+  background: #bababa;
+
+  &:hover {
+    filter: brightness(0.9);
+  }
+
+  &:first-child {
+    border-radius: 5px 5px 0 0;
+  }
+
+  &:last-child {
+    border-radius: 0 0 5px 5px;
+  }
+}
+</style>

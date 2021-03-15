@@ -10,7 +10,7 @@ import { defineComponent, PropType, ref, watchEffect } from 'vue';
 
 export default defineComponent({
   name: 'NumberWithMetricInput',
-  emits: ['state:update'],
+  emits: ['update:state'],
   props: {
     metricList: {
       type: Array as PropType<Array<string>>,
@@ -27,7 +27,7 @@ export default defineComponent({
         metric
       };
 
-      emit('state:update', state);
+      emit('update:state', state);
     });
 
     return {
@@ -40,10 +40,12 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .number-with-metric-input {
-  background: #bababa;
-  padding: 7px;
   margin: 0.5rem;
+  padding: 7px;
+
   font-size: 14px;
+
+  background: #bababa;
   border-radius: 5px;
 }
 </style>

@@ -1,7 +1,8 @@
 <template lang="pug">
 .complex-form-controls
   div
-    Select(placeholder="Select something..." label="Select" :options="options")
+    Select(v-model:value="selectedOption" placeholder="Select something..." label="Select Form Field" :options="options")
+    span Selected Option: {{ selectedOption }}
   div
     NumberWithMetricInput(v-model="numberWithMetricInputValue" :metricList="['mi', 'km']")
     span {{ numberWithMetricInputValue?.metric }}
@@ -27,6 +28,7 @@ export default defineComponent({
 
     const numberWithMetricInputValue = ref<NumberWithMetricInputValue>();
 
+    const selectedOption = ref<Option>();
     const options: Array<Option> = [
       {
         label: 'Value 1',
@@ -44,7 +46,8 @@ export default defineComponent({
 
     return {
       numberWithMetricInputValue,
-      options
+      options,
+      selectedOption
     };
   }
 });
@@ -54,10 +57,12 @@ export default defineComponent({
 @include google-font('IBM Plex Sans');
 
 .complex-form-controls {
-  height: 100%;
   width: 100%;
-  background: #dedede;
+  height: 100%;
   padding: 1rem;
+
   font-family: 'IBM Plex Sans';
+
+  background: #dedede;
 }
 </style>

@@ -11,18 +11,18 @@
     "@types/resize-observer-browser": "^0.1.5",
     "animejs": "^3.2.1",
     "body-scroll-lock": "^3.1.5",
-    "core-js": "^3.6.4",
-    "dompurify": "^2.2.6",
+    "core-js": "^3.9.1",
+    "dompurify": "^2.2.7",
     "gradient-path": "^2.1.0",
-    "marked": "^2.0.0",
+    "marked": "^2.0.1",
     "roughjs": "^4.3.1",
     "tinygradient": "^1.1.3",
-    "vue": "^3.0.2",
+    "vue": "^3.0.7",
     "vue-composable": "^1.0.0-beta.20",
-    "vue-router": "^4.0.3"
+    "vue-router": "^4.0.5"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-optional-chaining": "^7.12.7",
+    "@babel/plugin-proposal-optional-chaining": "^7.13.8",
     "@types/animejs": "^3.1.2",
     "@types/body-scroll-lock": "^2.6.1",
     "@types/dompurify": "^2.2.1",
@@ -35,7 +35,7 @@
     "@vue/cli-plugin-router": "^4.5.11",
     "@vue/cli-plugin-typescript": "^4.5.11",
     "@vue/cli-service": "^4.5.11",
-    "@vue/compiler-sfc": "^3.0.5",
+    "@vue/compiler-sfc": "^3.0.7",
     "@vue/eslint-config-airbnb": "^5.0.2",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^5.0.2",
@@ -49,10 +49,10 @@
     "pug-plain-loader": "^1.0.0",
     "raw-loader": "^4.0.2",
     "sass-loader": "^8.0.2",
-    "stylelint": "^13.3.0",
+    "stylelint": "^13.12.0",
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-standard": "^20.0.0",
     "stylelint-order": "^4.0.0",
-    "typescript": "~3.9.3"
+    "typescript": "^4.2.3"
   }
 }
