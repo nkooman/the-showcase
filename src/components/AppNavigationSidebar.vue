@@ -2,7 +2,7 @@
 .sidebar
   a.menu-toggle(role="button" @click="toggleNavigation" aria-label="Toggle menu")
     MaterialIcon.menu-icon {{ menuIcon }}
-  .project-title(:title="currentRouteName") {{ currentRouteName }}
+  .project-title {{ currentRouteName }}
   .project-selector
     a.backward(role="button" title="Navigate backward" aria-label="Navigate backward" @click="navigateBackward")
       MaterialIcon.menu-icon chevron_left
@@ -62,12 +62,7 @@ export default defineComponent({
       router.push({ path });
     };
 
-    enum MenuIcons {
-      Close = 'close',
-      Menu = 'menu'
-    }
-
-    const menuIcon = computed((): MenuIcons => (props.isOpen ? MenuIcons.Close : MenuIcons.Menu));
+    const menuIcon = computed(() => (props.isOpen ? 'close' : 'menu'));
 
     const toggleNavigation = () => context.emit('toggleNavigation');
 

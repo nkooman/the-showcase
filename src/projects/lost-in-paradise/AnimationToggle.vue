@@ -1,6 +1,6 @@
 <template lang="pug">
 label.switch
-  input(v-model="animationToggle" type="checkbox" @change="emitAnimationToggle")
+  input(v-model="toggle" type="checkbox" @change="emitAnimationToggle")
   div
     span Animations?
 </template>
@@ -14,14 +14,14 @@ export default defineComponent({
   props: {
     animationToggle: Boolean
   },
-  setup(_, { emit }) {
-    const animationToggle = ref<boolean>();
+  setup(props, { emit }) {
+    const toggle = ref<boolean>(props.animationToggle);
     const emitAnimationToggle = () => {
-      emit('update:animationToggle', animationToggle.value);
+      emit('update:animationToggle', toggle.value);
     };
 
     return {
-      animationToggle,
+      toggle,
       emitAnimationToggle
     };
   }

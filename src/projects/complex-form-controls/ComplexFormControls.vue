@@ -1,24 +1,28 @@
 <template lang="pug">
-.complex-form-controls
-  div
-    Select(v-model:value="selectedOption" placeholder="Select something..." label="Select Form Field" :options="options")
-    span Selected Option: {{ selectedOption }}
-  div
-    NumberWithMetricInput(v-model="numberWithMetricInputValue" :metricList="['mi', 'km']")
-    span {{ numberWithMetricInputValue?.metric }}
-    span {{ numberWithMetricInputValue?.value }}
+ColorProvider(:colors="colors")
+  .complex-form-controls
+    .wrapper
+      div
+        Select(v-model:value="selectedOption" placeholder="Select something..." label="Select Form Field" :options="options")
+      div
+        NumberWithMetricInput(v-model="numberWithMetricInputValue" :metricList="['mi', 'km']")
+      NkSelectWrapper
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import Select, { Option } from './Select.vue';
+import ColorProvider from '@/components/ColorProvider.vue';
+import Select, { Option } from './FilterableSelect.vue';
 import NumberWithMetricInput from './NumberWithMetricInput.vue';
+import NkSelectWrapper from './NkSelectWrapper.vue';
 
 export default defineComponent({
   name: 'ComplexFormControls',
   components: {
+    ColorProvider,
     NumberWithMetricInput,
-    Select
+    Select,
+    NkSelectWrapper
   },
   setup() {
     type NumberWithMetricInputValue = {
@@ -44,7 +48,17 @@ export default defineComponent({
       }
     ];
 
+    const colors = {
+      '--caviar': '#302e2f',
+      '--roycroft-copper-red': '#7b311e',
+      '--indigo-batik': '#4d5c6d',
+      '--reflection': '#d2d6d3',
+      '--ice-cube': '#e3e4e2',
+      '--extra-white': '#eff0ec'
+    };
+
     return {
+      colors,
       numberWithMetricInputValue,
       options,
       selectedOption
@@ -54,15 +68,23 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@include google-font('IBM Plex Sans');
+@include google-font('IBM Plex Sans', (400, 500, 600, 700));
 
 .complex-form-controls {
-  width: 100%;
   height: 100%;
   padding: 1rem;
 
-  font-family: 'IBM Plex Sans';
+  font-family: 'IBM Plex Sans', sans-serif;
 
-  background: #dedede;
+  background: var(--extra-white);
+}
+
+.wrapper {
+  display: grid;
+  grid: auto-fill / 1fr;
+  gap: 5rem;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 5rem 0;
 }
 </style>

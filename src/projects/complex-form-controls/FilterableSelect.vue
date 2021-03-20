@@ -1,10 +1,12 @@
 <template lang="pug">
 .select(ref="selectRef")
-  span.label(@click="open") {{ label }}
-  .select-value(@click="open")
-    input.filter-input(v-model="filterInput" v-if="isOpen" ref="filterInputRef" @keyup.esc="close")
+  span.label(id="select-label" @click="open") {{ label }}
+  .select-value(role="button" aria-labelledby="select-label" @click="open" :class="{ active: isOpen }")
+    input.filter-input(v-model="filterInput" v-if="isOpen" ref="filterInputRef" :tabindex="0" @keyup.esc="close")
     span.placeholder(v-if="!hasSelected && !isOpen") {{ placeholder }}
     span.selected-value(v-if="hasSelected && !isOpen") {{ selected?.label }}
+    .expand(@click.stop="toggle" title="Open dropdown")
+      MaterialIcon expand_more
   .select-options(v-show="show")
     .select-option(
       v-for="option in filteredOptions"
@@ -15,6 +17,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, nextTick, PropType, ref, watch } from 'vue';
+import MaterialIcon from '@/components/MaterialIcon.vue';
 import { useOnOutsidePress } from 'vue-composable';
 
 export type Option = Object & {
@@ -23,8 +26,11 @@ export type Option = Object & {
 };
 
 export default defineComponent({
-  name: 'Select',
+  name: 'FilterableSelect',
   emits: ['update:value'],
+  components: {
+    MaterialIcon
+  },
   props: {
     label: {
       type: String,
@@ -46,6 +52,14 @@ export default defineComponent({
     const filterInputRef = ref<HTMLInputElement>();
     const show = ref(false);
 
+    // Filtering
+    const filterInput = ref('');
+    const toLowercaseAndRemoveWhitespace = (value: string) => value.toLowerCase().replace(/\s/g, '');
+    const optionIncludesValue = (option: Option, include: string) =>
+      toLowercaseAndRemoveWhitespace(option.value).includes(toLowercaseAndRemoveWhitespace(include)) ||
+      toLowercaseAndRemoveWhitespace(option.label).includes(toLowercaseAndRemoveWhitespace(include));
+    const filteredOptions = computed(() => props.options.filter(option => optionIncludesValue(option, filterInput.value)));
+
     // Display
     const isOpen = computed(() => show.value);
 
@@ -56,16 +70,15 @@ export default defineComponent({
 
     const close = () => {
       nextTick(() => filterInputRef.value?.blur());
+      filterInput.value = '';
       show.value = false;
     };
 
-    useOnOutsidePress(selectRef, close);
+    const toggle = () => {
+      isOpen.value ? close() : open();
+    };
 
-    // Filtering
-    const filterInput = ref('');
-    const optionIncludesValue = (option: Option) =>
-      option.label.includes(filterInput.value) || option.value.includes(filterInput.value);
-    const filteredOptions = computed(() => props.options.filter(optionIncludesValue));
+    useOnOutsidePress(selectRef, close);
 
     // Selection
     const selected = ref<Option>();
@@ -82,6 +95,7 @@ export default defineComponent({
       filterInputRef,
       show,
       open,
+      toggle,
       selectAndClose,
       selected,
       hasSelected,
@@ -94,56 +108,108 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.select {
+  position: relative;
+}
+
 .select-value {
+  display: flex;
+  flex-flow: row nowrap;
+  align-content: center;
+  justify-content: space-between;
+  height: 5rem;
   margin: 0.5rem;
+  margin-bottom: 0;
   padding: 7px;
 
-  font-size: 14px;
-
-  background: #bababa;
+  background: var(--ice-cube);
+  border: solid 2px var(--reflection);
   border-radius: 5px;
 }
 
+.active {
+  border: solid 2px var(--caviar);
+}
+
+.expand {
+  display: grid;
+
+  font-size: 24px;
+  place-content: center center;
+
+  user-select: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 .label {
-  margin-left: 0.5rem;
+  padding-left: 10px;
+
+  color: var(--caviar);
+  font-weight: 400;
 
   font-size: 14px;
+}
+
+.filter-input {
+  width: 100%;
+
+  color: var(--caviar);
+
+  border: none;
+  outline: none;
+
+  appearance: none;
 }
 
 .filter-input,
 .placeholder,
 .selected-value {
-  height: 28px;
   padding: 7px;
 
-  color: #444;
+  color: var(--caviar);
+  font-size: 18px;
+  line-height: 1;
 
   background: transparent;
-  border: none;
 }
 
 .select-options {
-  margin: 0.5rem;
+  position: absolute;
 
-  font-size: 14px;
+  width: calc(100% - 1rem);
+
+  margin-left: 0.5rem;
+
+  border: solid 2px var(--reflection);
+
+  border-radius: 5px;
 }
 
 .select-option {
   width: 100%;
+
   padding: 7px 14px;
 
-  background: #bababa;
+  font-size: 14px;
 
-  &:hover {
+  background: var(--ice-cube);
+
+  user-select: none;
+
+  &:hover,
+  &:focus {
     filter: brightness(0.9);
   }
 
   &:first-child {
-    border-radius: 5px 5px 0 0;
+    border-radius: 3px 3px 0 0;
   }
 
   &:last-child {
-    border-radius: 0 0 5px 5px;
+    border-radius: 0 0 3px 3px;
   }
 }
 </style>

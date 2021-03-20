@@ -15,7 +15,7 @@
       "**/*.csproj.user": true,
       "**/.vs/": true,
       "**/bin/": true,
-      "**/node_modules/": true,
+      // "**/node_modules/": true,
       "**/obj/": true,
       "**/.expo*/": true
     },

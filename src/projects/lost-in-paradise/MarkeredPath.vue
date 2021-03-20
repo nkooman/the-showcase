@@ -82,9 +82,7 @@ export default defineComponent({
     );
 
     return {
-      canvasElement,
-      height: props.height,
-      width: props.width
+      canvasElement
     };
   }
 });

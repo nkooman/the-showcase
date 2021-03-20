@@ -15,11 +15,19 @@ module.exports = {
       .plugin('html')
       .tap(args => [{ ...args[0], title: 'The Showcase' }])
       .end();
+
+    config.module.rule('markdown').test(/\.md$/).use('raw-loader').loader('raw-loader').end();
+
     config.module
-      .rule('markdown')
-      .test(/\.md$/)
-      .use('raw-loader')
-      .loader('raw-loader')
+      .rule('vue')
+      .use('vue-loader')
+      .tap(options => {
+        const compilerOptions = {
+          isCustomElement: tag => tag.startsWith('nk-')
+        };
+
+        return { ...options, compilerOptions };
+      })
       .end();
   },
   css: {
