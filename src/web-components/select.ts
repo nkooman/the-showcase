@@ -12,16 +12,27 @@ class SelectElement extends HTMLSelectElement {
     select.classList.add('nk-select');
 
     const selectField = document.createElement('div');
-    selectField.classList.add('nk-select-value');
+    selectField.classList.add('nk-select-field');
     selectField.setAttribute('aria-labelledby', 'nk-select-label');
     selectField.setAttribute('tabindex', '0');
-    selectField.textContent = currentSelectedOption();
+
+    const selectFieldLabel = document.createElement('span');
+    selectField.appendChild(selectFieldLabel);
+    selectFieldLabel.classList.add('nk-select-field-value');
+    selectFieldLabel.textContent = currentSelectedOption();
+
+    const optionsWrapper = document.createElement('div');
+    optionsWrapper.classList.add('nk-select-options');
+    optionsWrapper.style.display = 'none';
 
     const options = Array.from(this.options).map((selectOption, index) => {
       const option = document.createElement('div');
       option.classList.add('nk-select-option');
+
       option.addEventListener('click', () => {
         this.selectedIndex = index;
+        optionsWrapper.style.display = 'none';
+        selectFieldLabel.textContent = currentSelectedOption();
       });
 
       const optionLabel = document.createElement('span');
@@ -34,15 +45,6 @@ class SelectElement extends HTMLSelectElement {
 
     const removeAllHoverState = () => options.forEach(option => option.classList.remove('hover'));
 
-    const optionsWrapper = document.createElement('div');
-    optionsWrapper.classList.add('nk-select-options');
-    optionsWrapper.style.display = 'none';
-
-    const label = document.createElement('span');
-    label.innerText = this.dataset.label || '';
-    label.classList.add('nk-select-label');
-    label.setAttribute('id', 'nk-select-label');
-
     const openSelect = () => {
       this.focus();
       removeAllHoverState();
@@ -52,8 +54,13 @@ class SelectElement extends HTMLSelectElement {
 
     const closeSelect = () => {
       optionsWrapper.style.display = 'none';
-      selectField.textContent = currentSelectedOption();
+      selectFieldLabel.textContent = currentSelectedOption();
     };
+
+    const label = document.createElement('span');
+    label.innerText = this.dataset.label || '';
+    label.classList.add('nk-select-label');
+    label.setAttribute('id', 'nk-select-label');
 
     selectField.addEventListener('click', openSelect);
     label.addEventListener('click', openSelect);
@@ -61,8 +68,28 @@ class SelectElement extends HTMLSelectElement {
     this.addEventListener('change', () => {
       removeAllHoverState();
       options[this.selectedIndex].classList.add('hover');
-      selectField.textContent = currentSelectedOption();
+      selectFieldLabel.textContent = currentSelectedOption();
     });
+
+    const dropdown = document.createElement('div');
+    selectField.appendChild(dropdown);
+    dropdown.classList.add('nk-select-dropdown');
+    dropdown.title = 'Open dropdown';
+    dropdown.addEventListener('click', e => {
+      if (optionsWrapper.style.display === 'initial') {
+        e.stopPropagation();
+        closeSelect();
+        selectField.focus();
+      } else if (optionsWrapper.style.display === 'none') {
+        e.stopPropagation();
+        openSelect();
+      }
+    });
+
+    const dropdownIcon = document.createElement('i');
+    dropdown.appendChild(dropdownIcon);
+    dropdownIcon.classList.add('material-icons');
+    dropdownIcon.textContent = 'expand_more';
 
     this.addEventListener('blur', removeAllHoverState);
 
