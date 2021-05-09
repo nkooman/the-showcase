@@ -1,5 +1,5 @@
 <template lang="pug">
-.markered-path(@mouseover="hover = true" @mouseleave="hover = false")
+.markered-path
   canvas(ref="canvasElement" :height="height" :width="width")
 </template>
 
@@ -82,9 +82,7 @@ export default defineComponent({
     );
 
     return {
-      canvasElement,
-      height: props.height,
-      width: props.width
+      canvasElement
     };
   }
 });

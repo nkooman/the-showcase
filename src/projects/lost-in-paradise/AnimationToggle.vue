@@ -1,12 +1,13 @@
 <template lang="pug">
 label.switch
-  input(v-model="animationToggle" type="checkbox" @change="emitAnimationToggle")
+  input(v-model="toggle" type="checkbox")
   div
     span Animations?
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
+import { useVModel } from 'vue-composable';
 
 export default defineComponent({
   name: 'AnimationToggle',
@@ -14,15 +15,11 @@ export default defineComponent({
   props: {
     animationToggle: Boolean
   },
-  setup(_, { emit }) {
-    const animationToggle = ref<boolean>();
-    const emitAnimationToggle = () => {
-      emit('update:animationToggle', animationToggle.value);
-    };
+  setup(props) {
+    const toggle = useVModel(props, 'animationToggle');
 
     return {
-      animationToggle,
-      emitAnimationToggle
+      toggle
     };
   }
 });

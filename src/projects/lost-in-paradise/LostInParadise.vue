@@ -52,8 +52,8 @@ $white: #f9f9f9;
   display: grid;
   gap: 5rem;
   width: 100%;
-  min-height: 100%;
   height: min-content;
+  min-height: 100%;
   padding: 10rem 0;
 
   font-family: 'Caveat', sans-serif;
