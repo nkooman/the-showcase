@@ -11,6 +11,8 @@ import LostInParadise from '@/projects/lost-in-paradise/LostInParadise.vue';
 import LostInParadiseMarkdown from '@/projects/lost-in-paradise/lost-in-paradise.md';
 import Neumorphism from '@/projects/neumorphism/Neumorphism.vue';
 import NeumorphismMarkdown from '@/projects/neumorphism/neumorphism.md';
+import Modernism from '@/projects/modernism/Modernism.vue';
+import ModernismMarkdown from '@/projects/modernism/modernism.md';
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -81,6 +83,16 @@ export const routes: RouteRecordRaw[] = [
       isProject: true,
       createdOn: new Date('2/21/2021'),
       markdown: NeumorphismMarkdown
+    }
+  },
+  {
+    path: '/modernism',
+    name: 'Modernism',
+    component: Modernism,
+    meta: {
+      isProject: true,
+      createdOn: new Date('5/9/2021'),
+      markdown: ModernismMarkdown
     }
   }
 ];
