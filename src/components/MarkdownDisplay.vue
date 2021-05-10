@@ -27,10 +27,12 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/utils/markdown';
+
 @include google-font('Archivo Black');
 @include google-font('Lora');
 
-.markdown-display {
+::v-deep(.markdown-display) {
   min-width: 200px;
   max-width: 980px;
   margin: 0 auto;
@@ -40,50 +42,48 @@ export default defineComponent({
 
   font-family: 'Lora', serif;
 
-  :deep() {
-    @import '~@/styles/utils/markdown';
+  * {
+    font-size: 2rem;
+  }
 
-    * {
-      font-size: 2rem;
-    }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Archivo Black', sans-serif;
+  }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      font-family: 'Archivo Black', sans-serif;
-    }
+  #ideas + ul {
+    list-style-type: none;
 
-    #ideas + ul {
-      list-style-type: none;
+    input:checked {
+      position: relative;
 
-      input:checked {
-        appearance: none;
-        width: 13px;
-        height: 13px;
-        position: relative;
+      width: 13px;
+      height: 13px;
 
-        &::before {
-          margin: 3px 0;
-          position: absolute;
+      appearance: none;
 
-          display: grid;
+      &::before {
+        position: absolute;
 
-          width: inherit;
-          height: inherit;
+        display: grid;
 
-          color: #fff;
+        width: inherit;
+        height: inherit;
+        margin: 3px 0;
 
-          font-size: 8px;
+        color: #fff;
 
-          background-color: #1b2127;
-          border-radius: 2px;
+        font-size: 8px;
 
-          content: '✔';
-          place-items: center;
-        }
+        background-color: #1b2127;
+        border-radius: 2px;
+
+        content: '✔';
+        place-items: center;
       }
     }
   }

@@ -36,11 +36,13 @@ export default defineComponent({
 @include google-font('Rubik');
 
 .neumorphism {
-  background: #1d1d1d;
-  min-height: 100%;
   height: min-content;
+  min-height: 100%;
   padding: 2rem;
+
   font-family: 'Rubik', sans-serif;
+
+  background: #1d1d1d;
 }
 
 .wrapper {
@@ -52,8 +54,8 @@ export default defineComponent({
   display: grid;
   grid: 1fr / repeat(4, 1fr);
   gap: 2rem;
-  margin-bottom: 5rem;
   width: 100%;
+  margin-bottom: 5rem;
 }
 
 .input-group {

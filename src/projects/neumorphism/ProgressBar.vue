@@ -52,47 +52,55 @@ $light: #282828;
 $background: #1d1d1d;
 
 .progress-bar {
-  height: 2rem;
-  width: 100%;
-  border-radius: 2rem;
-  display: grid;
   position: relative;
+
+  display: grid;
+  width: 100%;
+  height: 2rem;
   margin: 10rem 0;
+
+  border-radius: 2rem;
+  box-shadow: -5px -5px 20px 0 $light, 10px 10px 20px 5px $dark;
   place-items: center flex-start;
-  box-shadow: -5px -5px 20px 0px $light, 10px 10px 20px 5px $dark;
 }
 
 .progress-bar-fill {
   height: 0.6rem;
   margin: 0 2%;
-  border-radius: 1rem;
+
   background: linear-gradient(90deg, rgba(193, 34, 195, 1) 0%, rgba(255, 234, 67, 1) 100%);
+  border-radius: 1rem;
 }
 
 .progress-bar-tooltip {
   position: absolute;
-  height: 5rem;
-  background: $background;
-  width: 8rem;
-  color: #fff;
   top: -6rem;
+
   display: grid;
+  width: 8rem;
+  height: 5rem;
+
+  color: #fff;
   color: #a7a7a7;
-  border-radius: 1rem;
-  place-items: center;
   font-size: 2rem;
-  box-shadow: -5px -5px 18px 0px $light, 10px 10px 20px 5px $dark;
+
+  background: $background;
+  border-radius: 1rem;
+  box-shadow: -5px -5px 18px 0 $light, 10px 10px 20px 5px $dark;
+  place-items: center;
 
   &::before {
+    position: absolute;
+    bottom: calc(-50% + 15px);
+
     width: 0;
     height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
 
     border-top: 10px solid $background;
-    position: absolute;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+
     content: ' ';
-    bottom: calc(-50% + 15px);
   }
 }
 </style>

@@ -83,28 +83,32 @@ $light: #282828;
 $background: #1d1d1d;
 
 .gauge {
-  margin: 0 auto;
-  box-shadow: -5px -5px 20px 0px $light, 10px 10px 20px 5px $dark;
-  height: 20rem;
-  width: 20rem;
   display: grid;
-  place-items: center;
+  width: 20rem;
+  height: 20rem;
+  margin: 0 auto;
+
   border-radius: 50%;
+  box-shadow: -5px -5px 20px 0 $light, 10px 10px 20px 5px $dark;
+  place-items: center;
 }
 
 .inner-gauge {
-  box-shadow: inset -5px -5px 20px -5px $light, inset 5px 5px 20px -5px $dark;
-  height: 50%;
-  width: 50%;
-  border-radius: 50%;
   display: grid;
-  place-items: center;
+  width: 50%;
+  height: 50%;
+
   color: #a7a7a7;
   font-size: 2rem;
+
+  border-radius: 50%;
+  box-shadow: inset -5px -5px 20px -5px $light, inset 5px 5px 20px -5px $dark;
+  place-items: center;
 }
 
 .gauge-fill {
   position: absolute;
+
   transform: rotate(83deg);
 }
 </style>

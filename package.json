@@ -14,11 +14,10 @@
     "gradient-path": "^2.1.0",
     "marked": "^2.0.0",
     "tinygradient": "^1.1.3",
-    "vue": "^3.0.2",
-    "vue-router": "^4.0.3"
+    "vue": "^3.0.11",
+    "vue-router": "^4.0.6"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-optional-chaining": "^7.12.7",
     "@types/animejs": "^3.1.2",
     "@types/body-scroll-lock": "^2.6.1",
     "@types/dompurify": "^2.2.1",
@@ -30,7 +29,7 @@
     "@vue/cli-plugin-eslint": "^4.5.11",
     "@vue/cli-plugin-router": "^4.5.11",
     "@vue/cli-plugin-typescript": "^4.5.11",
-    "@vue/cli-service": "^4.5.11",
+    "@vue/cli-service": "^4.5.13",
     "@vue/compiler-sfc": "^3.0.5",
     "@vue/eslint-config-airbnb": "^5.0.2",
     "@vue/eslint-config-prettier": "^6.0.0",
@@ -41,18 +40,17 @@
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^6.2.2",
-    "node-sass": "^4.12.0",
     "prettier": "^1.19.1",
-    "pug": "^2.0.4",
-    "pug-plain-loader": "^1.0.0",
+    "pug": "^3.0.2",
+    "pug-plain-loader": "^1.1.0",
     "raw-loader": "^4.0.2",
     "roughjs": "^4.3.1",
+    "sass": "^1.32.12",
     "sass-loader": "^8.0.2",
     "stylelint": "^13.3.0",
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-standard": "^20.0.0",
     "stylelint-order": "^4.0.0",
-    "typescript": "~3.9.3",
-    "vue-composable": "^1.0.0-beta.23"
+    "typescript": "~3.9.3"
   }
 }

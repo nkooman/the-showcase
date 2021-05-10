@@ -34,7 +34,7 @@ export default defineComponent({
 
   setup(props, context) {
     const router = useRouter();
-    const currentRouteName = computed(() => router.currentRoute.value.name);
+    const currentRouteName = computed(() => router.currentRoute.value.name as string);
 
     const allProjectRoutes = computed(() => router.options.routes.filter(route => route?.meta?.isProject));
 

@@ -38,24 +38,29 @@ $light: #282828;
 $color: #a7a7a7;
 
 .button {
-  all: unset;
-  cursor: pointer;
-  font-size: 2rem;
-  height: 5rem;
-  width: 5rem;
-  margin: 1rem;
-  border-radius: 50%;
-  box-shadow: -5px -5px 20px 0px $light, 10px 10px 20px 5px $dark, inset 0 0 0 0 $light, inset 0 0 0 0 $dark;
   display: grid;
-  place-items: center;
+  width: 5rem;
+  height: 5rem;
+  margin: 1rem;
+
   color: $color;
+  font-size: 2rem;
+
+  border-radius: 50%;
+  box-shadow: -5px -5px 20px 0 $light, 10px 10px 20px 5px $dark, inset 0 0 0 0 $light, inset 0 0 0 0 $dark;
+  cursor: pointer;
+
   transition: box-shadow 0.1s ease;
+  all: unset;
+  place-items: center;
 
   &:active {
     box-shadow: 0 0 0 0 $dark, 0 0 0 0 $light, inset -5px -5px 20px -10px $light, inset 5px 5px 20px -10px $dark;
+
     i {
-      transform: perspective(10px) translateZ(-1px);
       color: var(--active-color);
+
+      transform: perspective(10px) translateZ(-1px);
     }
   }
 }
