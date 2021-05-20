@@ -96,9 +96,9 @@ $padding: clamp(2rem, 6vmax, 10rem);
 }
 
 $top: calc(100% - clamp(10rem, 30%, 20rem));
-$right: calc(-0.5 * #{$padding});
-$offset: calc(-0.5 * #{$padding});
-$image-size: clamp(15rem, 22vmax, 40rem);
+$right: calc(-0.4 * #{$padding});
+$offset: calc(-0.4 * #{$padding});
+$image-size: clamp(10rem, 22vmax, 40rem);
 
 $colors: (
   1: $green,
