@@ -14,14 +14,6 @@
   "rules": {
     "prettier/prettier": ["error"],
     "linebreak-style": ["error", "windows"],
-    "no-multi-assign": "off",
-    "no-underscore-dangle": "warn",
-    "eqeqeq": "warn",
-    "no-param-reassign": "warn",
-    "camelcase": "warn",
-    "class-methods-use-this": "off",
-    "import/no-unresolved": "off",
-    "import/extensions": "off",
     "no-console": "warn",
     "no-debugger": "warn",
     "import/prefer-default-export": "off",
@@ -31,9 +23,4 @@
     "no-unused-expressions": "off",
     "@typescript-eslint/no-unused-expressions": "off"
   },
-  "settings": {
-    "import/resolver": {
-      "webpack": "webpack.config.js"
-    }
-  }
 }

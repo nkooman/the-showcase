@@ -24,7 +24,7 @@
     "selector-pseudo-element-no-unknown": [
       true,
       {
-        "ignorePseudoElements": ["deep"]
+        "ignorePseudoElements": ["v-deep"]
       }
     ]
   }
