@@ -19,8 +19,23 @@ module.exports = {
       .rule('markdown')
       .test(/\.md$/)
       .use('raw-loader')
-      .loader('raw-loader')
-      .end();
+      .loader('raw-loader');
+    config.module
+      .rule('scss')
+      .oneOf('vue')
+      .use('sass-loader')
+      .tap(opts => ({
+        ...opts,
+        // eslint-disable-next-line global-require
+        implementation: require('sass'),
+
+        // See https://github.com/webpack-contrib/sass-loader/issues/804
+        // webpackImporter: false,
+
+        sassOptions: {
+          includePaths: ['./node_modules', './src']
+        }
+      }));
   },
   css: {
     loaderOptions: {

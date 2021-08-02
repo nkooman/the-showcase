@@ -11,6 +11,8 @@ import LostInParadise from '@/projects/lost-in-paradise/LostInParadise.vue';
 import LostInParadiseMarkdown from '@/projects/lost-in-paradise/lost-in-paradise.md';
 import Neumorphism from '@/projects/neumorphism/Neumorphism.vue';
 import NeumorphismMarkdown from '@/projects/neumorphism/neumorphism.md';
+import Depth from '@/projects/depth/Depth.vue';
+import DepthMarkdown from '@/projects/depth/depth.md';
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -18,6 +20,7 @@ declare module 'vue-router' {
     isProject: boolean;
     createdOn: Date;
     markdown: string;
+    desktopOnly?: boolean;
   }
 }
 
@@ -81,6 +84,17 @@ export const routes: RouteRecordRaw[] = [
       isProject: true,
       createdOn: new Date('2/21/2021'),
       markdown: NeumorphismMarkdown
+    }
+  },
+  {
+    path: '/depth',
+    name: 'Depth',
+    component: Depth,
+    meta: {
+      isProject: true,
+      createdOn: new Date('8/1/2021'),
+      markdown: DepthMarkdown,
+      desktopOnly: true
     }
   }
 ];
