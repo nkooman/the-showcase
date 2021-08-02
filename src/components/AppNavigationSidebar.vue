@@ -4,9 +4,9 @@
     MaterialIcon.menu-icon {{ menuIcon }}
   .project-title(:title="currentRouteName") {{ currentRouteName }}
   .project-selector
-    a.backward(role="button" title="Navigate backward" aria-label="Navigate backward" @click="navigateBackward")
+    a.backward(role="button" title="Navigate backward" aria-label="Navigate backward" @click="navigateBackward" :disabled="isStartOfRoutes")
       MaterialIcon.menu-icon chevron_left
-    a.forward(role="button" title="Navigate forward" aria-label="Navigate forward" @click="navigateForward")
+    a.forward(role="button" title="Navigate forward" aria-label="Navigate forward" @click="navigateForward" :disabled="isEndOfRoutes")
       MaterialIcon.menu-icon chevron_right
 </template>
 
@@ -34,7 +34,7 @@ export default defineComponent({
 
   setup(props, context) {
     const router = useRouter();
-    const currentRouteName = computed(() => router.currentRoute.value.name);
+    const currentRouteName = computed(() => router.currentRoute.value.name?.toString());
 
     const allProjectRoutes = computed(() => router.options.routes.filter(route => route?.meta?.isProject));
 
@@ -72,6 +72,8 @@ export default defineComponent({
     const toggleNavigation = () => context.emit('toggleNavigation');
 
     return {
+      isStartOfRoutes,
+      isEndOfRoutes,
       currentRouteName,
       navigateBackward,
       navigateForward,
@@ -170,13 +172,6 @@ $app-navigation-width: 7.5rem;
   &:active {
     filter: brightness(0.5);
   }
-
-  &.disabled {
-    cursor: none;
-    filter: brightness(0.5);
-
-    pointer-events: none;
-  }
 }
 
 .backward,
@@ -187,6 +182,15 @@ $app-navigation-width: 7.5rem;
 
   &:active {
     filter: brightness(0.5);
+  }
+
+  &[disabled='true'] {
+    cursor: default;
+    filter: brightness(0.5);
+
+    &:active {
+      filter: none;
+    }
   }
 }
 </style>
