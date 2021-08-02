@@ -6,7 +6,7 @@ router-link(
     li.item(:class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active']")
       a.link(
         :href="href"
-        @click="[navigate($event), closeNavigation()]")
+        @click="[() => navigate($event), closeNavigation]")
         | {{ routeName }}
 </template>
 
