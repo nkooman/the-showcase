@@ -20,6 +20,7 @@ declare module 'vue-router' {
     isProject: boolean;
     createdOn: Date;
     markdown: string;
+    desktopOnly?: boolean;
   }
 }
 
@@ -92,7 +93,8 @@ export const routes: RouteRecordRaw[] = [
     meta: {
       isProject: true,
       createdOn: new Date('8/1/2021'),
-      markdown: DepthMarkdown
+      markdown: DepthMarkdown,
+      desktopOnly: true
     }
   }
 ];

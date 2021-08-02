@@ -12,7 +12,8 @@ nav.app-navigation(v-body-scroll-lock="isOpen" :class="{ active: isOpen }")
         ul.year-category(v-for="[year, routes] in aggregatedProjectRoutesByCreatedOn")
           li.section-label {{ year }}
           AppNavigationRouterLink(
-            v-for="{ path, name } in routes"
+            v-for="{ path, name, meta } in routes"
+            :desktopOnly="meta?.desktopOnly"
             :path="path"
             :routeName="name?.toString() ?? ''"
             :key="`${year} ${name?.toString() ?? ''}`"
@@ -106,7 +107,7 @@ $app-navigation-width: 7.5rem;
 
 .app-navigation {
   position: fixed;
-  z-index: 100; // Make sure the app navigation is above any content.
+  z-index: 100000; // Make sure the app navigation is above any content.
 
   font-family: 'Lora', serif;
 

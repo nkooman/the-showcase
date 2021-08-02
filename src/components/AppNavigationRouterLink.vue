@@ -3,7 +3,7 @@ router-link(
   custom
   v-slot="{ href, navigate, isActive, isExactActive }"
   :to="props.path")
-    li.item(:class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active']")
+    li.item(:class="{ 'router-link-active': isActive, 'router-link-exact-active': isExactActive, 'desktop-only': desktopOnly }")
       a.link(
         :href="href"
         @click="[() => navigate($event), closeNavigation]")
@@ -24,6 +24,11 @@ export default defineComponent({
     routeName: {
       type: String,
       required: true
+    },
+    desktopOnly: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
 
@@ -63,10 +68,16 @@ export default defineComponent({
 }
 
 .router-link-exact-active {
-  text-decoration: line-through;
+  text-decoration: line-through from-font white;
 
   opacity: 0.5;
 
   pointer-events: none;
+}
+
+@media (map-get($viewport, 'max-width-7')) {
+  .desktop-only {
+    display: none;
+  }
 }
 </style>
