@@ -1,15 +1,15 @@
 <template lang="pug">
 .detailed-content
-  .wrapper
+  .wrapper(:style="flexDirection")
     .text
       .heading: slot(name="heading" highlightClass="highlight")
       .body: slot(name="body")
-      CtaButton(:href="ctaButtonHref" type="primary"): slot(name="cta-button")
+      .button: CtaButton(:href="ctaButtonHref" type="primary"): slot(name="cta-button")
     .image: slot(name="image")
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, PropType, computed } from 'vue';
 import CtaButton from './CtaButton.vue';
 
 export default defineComponent({
@@ -26,24 +26,33 @@ export default defineComponent({
       type: String,
       required: true
     }
+  },
+  setup({ imagePosition }) {
+    const flexDirection = computed(() => ({ '--flex-direction': imagePosition === 'left' ? 'row-reverse' : 'row' }));
+
+    return {
+      flexDirection
+    };
   }
 });
 </script>
 
 <style lang="scss" scoped>
 .detailed-content {
-  padding: 10rem 0;
+  padding-block: 10rem;
 }
 
 .wrapper {
-  display: grid;
-  grid: auto-flow / 3fr 2fr;
+  --flex-direction: row;
 
-  background-color: #fff2;
-}
+  display: flex;
+  flex-direction: var(--flex-direction);
+  gap: 5rem;
+  justify-content: space-between;
 
-.text {
-  margin-left: 5rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding-block: 6rem;
+  padding-inline-start: 10rem;
 }
 
 .heading ::v-deep(*) {
@@ -59,5 +68,20 @@ export default defineComponent({
 .body {
   color: #fff;
   font-size: 2.4rem;
+}
+
+.button {
+  width: fit-content;
+}
+
+.image {
+  height: 100%;
+
+  filter: grayscale(1);
+
+  ::v-deep(img) {
+    object-fit: cover;
+    object-position: center;
+  }
 }
 </style>

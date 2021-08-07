@@ -54,7 +54,7 @@ export default defineComponent({
 
   display: block;
   width: 100%;
-  padding: 2rem;
+  padding: 2rem 7rem;
 
   color: var(--button-color);
 

@@ -52,7 +52,7 @@ h1 {
 }
 
 h2 {
-  font-size: clamp(4.8rem, 5vw, 6.4rem);
+  font-size: clamp(4.8rem, 3vw, 6.4rem);
 }
 
 .highlight {
@@ -65,7 +65,32 @@ h2 {
 }
 
 .cta-section {
-  margin-top: 20rem;
+  margin-top: clamp(10rem, 10vw, 20rem);
   margin-left: 15rem;
+}
+
+@media (map-get($viewport, 'max-width-7')) {
+  .landing {
+    grid: 1fr 1fr / auto-flow;
+    align-content: center;
+    align-items: center;
+    justify-items: flex-start;
+    height: auto;
+    padding: 1rem;
+
+    background: hsla(0, 0%, 100%, 0.5);
+    margin-inline: 3rem;
+    margin-block-start: 15rem;
+  }
+
+  h1,
+  h2 {
+    margin-block: 1rem;
+  }
+
+  .cta-section {
+    margin-top: 0;
+    margin-left: 0;
+  }
 }
 </style>
