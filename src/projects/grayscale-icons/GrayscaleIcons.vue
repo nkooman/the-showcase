@@ -66,7 +66,7 @@ export default defineComponent({
   &:hover {
     filter: grayscale(0);
 
-    transition: filter 0.25s ease;
+    transition: filter 0.25s map-deep-get($easing, ('standard', 'productive'));
   }
 }
 </style>

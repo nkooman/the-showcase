@@ -14,5 +14,5 @@
 - [ ] Puzzle box
 - [ ] Clicker game
 - [ ] Plug-n-play UI
-- [ ] Modern Ecommerce
-- [ ] Depth
+- [] Modern Ecommerce
+- [x] Depth

@@ -131,7 +131,7 @@ $app-navigation-width: 7.5rem;
 
   background: #20272e;
 
-  transition: all 0.25s ease;
+  transition: all 0.25s map-deep-get($easing, ('standard', 'expressive'));
 
   @media (map-get($viewport, 'min-width-7')) {
     width: 0;
@@ -163,7 +163,7 @@ $app-navigation-width: 7.5rem;
   list-style-type: none;
   opacity: 0;
 
-  transition: opacity 0.2s ease 0.2s;
+  transition: opacity 0.2s map-deep-get($easing, ('standard', 'productive')) 0.2s;
 
   .active & {
     opacity: 1;

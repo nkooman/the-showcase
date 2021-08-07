@@ -64,7 +64,7 @@ a {
     transform: scaleX(0);
     visibility: hidden;
 
-    transition: all 0.2s ease-in-out 0s;
+    transition: all 0.2s map-deep-get($easing, ('standard', 'expressive')) 0s;
 
     content: '';
   }

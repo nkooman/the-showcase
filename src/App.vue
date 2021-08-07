@@ -48,9 +48,12 @@ $app-navigation-width: 7.5rem;
   }
 }
 
-.slide-enter-active,
+.slide-enter-active {
+  transition: all 0.25s map-deep-get($easing, ('entrance', 'expressive'));
+}
+
 .slide-leave-active {
-  transition: all 0.25s;
+  transition: all 0.25s map-deep-get($easing, ('exit', 'expressive'));
 }
 
 .slide-enter,

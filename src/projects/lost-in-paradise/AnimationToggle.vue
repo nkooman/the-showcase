@@ -59,7 +59,7 @@ $white: #f9f9f9;
         background: $black;
         transform: scaleX(var(--s));
 
-        transition: transform var(--duration) ease;
+        transition: transform var(--duration) map-deep-get($easing, ('standard', 'expressive'));
 
         content: '';
       }
@@ -101,7 +101,8 @@ $white: #f9f9f9;
           box-shadow: inset 0 0 0 var(--s) var(--b);
           transform: translateX(var(--x));
 
-          transition: box-shadow var(--duration) ease, transform var(--duration) ease;
+          transition: box-shadow var(--duration) map-deep-get($easing, ('standard', 'expressive')),
+            transform var(--duration) map-deep-get($easing, ('standard', 'expressive'));
 
           content: '';
         }

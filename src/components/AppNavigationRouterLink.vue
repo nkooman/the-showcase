@@ -6,7 +6,7 @@ router-link(
     li.item(:class="{ 'router-link-active': isActive, 'router-link-exact-active': isExactActive, 'desktop-only': desktopOnly }")
       a.link(
         :href="href"
-        @click="[() => navigate($event), closeNavigation]")
+        @click="navigate($event), closeNavigation")
         | {{ routeName }}
 </template>
 
@@ -54,7 +54,7 @@ export default defineComponent({
   font-size: clamp(2.5rem, 3vw, 4rem);
   text-decoration: none;
 
-  transition: all 0.05s ease-in-out;
+  transition: all 0.05s map-deep-get($easing, ('standard', 'productive'));
 
   @media (map-get($viewport, 'min-width-7')) {
     opacity: 0.5;
