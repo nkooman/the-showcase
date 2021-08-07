@@ -4,17 +4,19 @@ nav.app-navigation(v-body-scroll-lock="isOpen" :class="{ active: isOpen }")
   .project-container
     ul.project-list(v-if="isOpen")
       AppNavigationRouterLink(
+        v-if="landingRoute"
         :path="landingRoute.path"
-        :routeName="landingRoute.name"
+        :routeName="landingRoute.name?.toString() ?? ''"
         @close-navigation="closeNavigation")
       li.nested-list
         ul.year-category(v-for="[year, routes] in aggregatedProjectRoutesByCreatedOn")
           li.section-label {{ year }}
           AppNavigationRouterLink(
-            v-for="{ path, name } in routes"
+            v-for="{ path, name, meta } in routes"
+            :desktopOnly="meta?.desktopOnly"
             :path="path"
-            :routeName="name"
-            :key="`${year} ${name}`"
+            :routeName="name?.toString() ?? ''"
+            :key="`${year} ${name?.toString() ?? ''}`"
             @close-navigation="closeNavigation")
 </template>
 
@@ -81,7 +83,7 @@ export default defineComponent({
 
     const aggregatedProjectRoutesByCreatedOn = computed(() => {
       return Object.entries(aggregatedProjectRoutes)
-        .map(([key, value]) => [key, sortRouteRecordsByCreatedOn(value)])
+        .map(([key, value]) => [key, sortRouteRecordsByCreatedOn(value)] as [string, RouteRecordRaw[]])
         .reverse();
     });
 
@@ -105,7 +107,7 @@ $app-navigation-width: 7.5rem;
 
 .app-navigation {
   position: fixed;
-  z-index: 100; // Make sure the app navigation is above any content.
+  z-index: 100000; // Make sure the app navigation is above any content.
 
   font-family: 'Lora', serif;
 
@@ -181,7 +183,7 @@ $app-navigation-width: 7.5rem;
 
   list-style-type: none;
 
-  :deep(.item) {
+  ::v-deep(.item) {
     grid-column: content;
   }
 }

@@ -13,6 +13,8 @@ import Neumorphism from '@/projects/neumorphism/Neumorphism.vue';
 import NeumorphismMarkdown from '@/projects/neumorphism/neumorphism.md';
 import ModernEcommerce from '@/projects/modern-ecommerce/ModernEcommerce.vue';
 import ModernEcommerceMarkdown from '@/projects/modern-ecommerce/modern-ecommerce.md';
+import Depth from '@/projects/depth/Depth.vue';
+import DepthMarkdown from '@/projects/depth/depth.md';
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -20,6 +22,7 @@ declare module 'vue-router' {
     isProject: boolean;
     createdOn: Date;
     markdown: string;
+    desktopOnly?: boolean;
   }
 }
 
@@ -93,6 +96,17 @@ export const routes: RouteRecordRaw[] = [
       isProject: true,
       createdOn: new Date('6/3/2021'),
       markdown: ModernEcommerceMarkdown
+    }
+  },
+  {
+    path: '/depth',
+    name: 'Depth',
+    component: Depth,
+    meta: {
+      isProject: true,
+      createdOn: new Date('8/1/2021'),
+      markdown: DepthMarkdown,
+      desktopOnly: true
     }
   }
 ];
