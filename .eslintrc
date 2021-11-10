@@ -13,7 +13,6 @@
   "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": ["error"],
-    "linebreak-style": ["error", "windows"],
     "no-multi-assign": "off",
     "no-underscore-dangle": "warn",
     "eqeqeq": "warn",

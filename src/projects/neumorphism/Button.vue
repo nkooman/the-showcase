@@ -45,14 +45,16 @@ $color: #a7a7a7;
   width: 5rem;
   margin: 1rem;
   border-radius: 50%;
-  box-shadow: -5px -5px 20px 0px $light, 10px 10px 20px 5px $dark, inset 0 0 0 0 $light, inset 0 0 0 0 $dark;
+  box-shadow: -5px -5px 20px 0px $light, 10px 10px 20px 5px $dark, inset 0 0 0 0 $light,
+    inset 0 0 0 0 $dark;
   display: grid;
   place-items: center;
   color: $color;
   transition: box-shadow 0.1s ease;
 
   &:active {
-    box-shadow: 0 0 0 0 $dark, 0 0 0 0 $light, inset -5px -5px 20px -10px $light, inset 5px 5px 20px -10px $dark;
+    box-shadow: 0 0 0 0 $dark, 0 0 0 0 $light, inset -5px -5px 20px -10px $light,
+      inset 5px 5px 20px -10px $dark;
     i {
       transform: perspective(10px) translateZ(-1px);
       color: var(--active-color);

@@ -36,14 +36,18 @@ export default defineComponent({
     const router = useRouter();
     const currentRouteName = computed(() => router.currentRoute.value.name?.toString());
 
-    const allProjectRoutes = computed(() => router.options.routes.filter(route => route?.meta?.isProject));
+    const allProjectRoutes = computed(() =>
+      router.options.routes.filter(route => route?.meta?.isProject)
+    );
 
     const currentRouteIndex = computed(() =>
       allProjectRoutes.value.findIndex(route => route.name === router.currentRoute.value.name)
     );
 
     const isStartOfRoutes = computed(() => currentRouteIndex.value <= 0);
-    const isEndOfRoutes = computed(() => currentRouteIndex.value >= allProjectRoutes.value.length - 1);
+    const isEndOfRoutes = computed(
+      () => currentRouteIndex.value >= allProjectRoutes.value.length - 1
+    );
     const getPathByIndex = (index: number) => allProjectRoutes.value[index].path;
 
     const navigateBackward = () => {

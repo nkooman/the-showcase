@@ -83,7 +83,9 @@ export default defineComponent({
 
     const aggregatedProjectRoutesByCreatedOn = computed(() => {
       return Object.entries(aggregatedProjectRoutes)
-        .map(([key, value]) => [key, sortRouteRecordsByCreatedOn(value)] as [string, RouteRecordRaw[]])
+        .map(
+          ([key, value]) => [key, sortRouteRecordsByCreatedOn(value)] as [string, RouteRecordRaw[]]
+        )
         .reverse();
     });
 

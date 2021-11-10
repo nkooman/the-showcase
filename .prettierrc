@@ -1,9 +1,9 @@
 {
   "eslintIntegration": true,
   "stylelintIntegration": true,
-  "printWidth": 125,
+  "printWidth": 100,
   "singleQuote": true,
-  "endOfLine": "crlf",
+  "endOfLine": "lf",
   "trailingComma": "none",
   "arrowParens": "avoid"
 }

@@ -61,7 +61,12 @@ export default defineComponent({
 
     const createMarkeredBackground = () =>
       // Reduce size of rectangle to make sure that the fill stroke is not cut off on the edges.
-      roughCanvas.value?.rectangle(width.value * 0.05, height.value * 0.15, width.value * 0.9, height.value * 0.7);
+      roughCanvas.value?.rectangle(
+        width.value * 0.05,
+        height.value * 0.15,
+        width.value * 0.9,
+        height.value * 0.7
+      );
 
     const draw = () => window.requestAnimationFrame(createMarkeredBackground);
 

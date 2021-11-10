@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 declare module '*.vue' {
   import type { DefineComponent } from 'vue'
 
