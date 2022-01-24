@@ -15,3 +15,4 @@
 - [ ] Clicker game
 - [ ] Plug-n-play UI
 - [ ] Depth
+- [ ] Window

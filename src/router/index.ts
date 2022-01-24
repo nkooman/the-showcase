@@ -13,6 +13,8 @@ import Neumorphism from '@/projects/neumorphism/Neumorphism.vue';
 import NeumorphismMarkdown from '@/projects/neumorphism/neumorphism.md';
 import Depth from '@/projects/depth/Depth.vue';
 import DepthMarkdown from '@/projects/depth/depth.md';
+import Window from '@/projects/window/Window.vue';
+import WindowMarkdown from '@/projects/window/window.md';
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -95,6 +97,16 @@ export const routes: RouteRecordRaw[] = [
       createdOn: new Date('8/1/2021'),
       markdown: DepthMarkdown,
       desktopOnly: true
+    }
+  },
+  {
+    path: '/window',
+    name: 'Window',
+    component: Window,
+    meta: {
+      isProject: true,
+      createdOn: new Date('1/23/22'),
+      markdown: WindowMarkdown
     }
   }
 ];
