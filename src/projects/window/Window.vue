@@ -1,6 +1,6 @@
 <template lang="pug">
 .window
-  img.background(src="./assets/images/norway.jpg")
+  img.background(src="./assets/images/landing.jpg")
   .wrapper
     .clip-path(ref="wrapperRef")
     nav
@@ -12,14 +12,19 @@
       section.landing(ref="landingRef")
         h1 A Snapshot of Norway
         button Take a look.
+        MaterialIcon.icon swipe_down_alt
       section
         h2 Stuff!
+        img(src="./assets/images/shoreline.jpg")
       section
         h2 More Stuff!
+        img(src="./assets/images/mountain-view.jpg")
 </template>
 
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import MaterialIcon from '@/components/MaterialIcon.vue';
 
 const wrapperRef = ref<HTMLDivElement | null>(null);
 const landingRef = ref<HTMLDivElement | null>(null);
@@ -125,7 +130,7 @@ a {
   }
 
   .clip-path {
-    --clip-path-width: calc(var(--frame-width) + 1px);
+    --clip-path-width: calc(var(--frame-width) + 2px);
 
     position: absolute;
     width: 100%;
@@ -192,6 +197,14 @@ nav {
   height: 100%;
   width: 100%;
   overflow-y: scroll;
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 section {
@@ -209,12 +222,12 @@ h2 {
   background: transparent;
   display: grid;
   align-items: center;
-  align-content: start;
-  justify-content: start;
+  /* align-content: start; */
   justify-items: start;
   height: 100%;
   gap: 3rem;
   padding-top: 10rem;
+  grid-template-rows: auto auto 1fr;
 
   @media screen and (max-width: 768px) {
     justify-content: center;
@@ -272,6 +285,26 @@ h2 {
         transform: translateX(0);
       }
     }
+  }
+
+  @keyframes bounce {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  .icon {
+    color: #fff;
+    font-size: 4rem;
+    align-self: end;
+    justify-self: center;
+    animation: bounce 1.5s infinite;
   }
 }
 </style>
