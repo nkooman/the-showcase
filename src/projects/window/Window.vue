@@ -218,6 +218,10 @@ h2 {
   font-size: 5rem;
 }
 
+img {
+  max-width: 100%;
+}
+
 .landing {
   background: transparent;
   display: grid;
